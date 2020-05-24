@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 15:48:43 by yictseng          #+#    #+#             */
-/*   Updated: 2020/05/21 17:36:15 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/05/24 18:42:10 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,15 @@ typedef struct s_config
 {
 	int		height;
 	int		width;
+	int		ceiling;
+	int		floor;
 	char	**map;
 }			   t_config;
 
 int		parsing(int fd, t_config *cfg, t_mlx *mlx);
 int		get_resolution(t_config *cfg, char *line);
 int		parse_texture(t_mlx *mlx, char *line);
+int		parse_rgb(t_config *cfg, char *line);
 int		ft_atoi(int i, char *line);
+int		ft_atoi_save_index(int *i, char *line);
 #endif

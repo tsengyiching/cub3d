@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 16:19:04 by yictseng          #+#    #+#             */
-/*   Updated: 2020/05/21 18:01:55 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/05/24 18:43:50 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	init_config(t_config *cfg)
 {
 	cfg->height = -1;
 	cfg->width = -1;
+	cfg->ceiling = -1;
+	cfg->floor = -1;
 }
 
 void	write_error(int error_code)
@@ -34,6 +36,8 @@ void	write_error(int error_code)
 		write(1, "Error: invalid path to the east texture\n", 40);
 	else if (error_code == -6)
 		write(1, "Error: invalid path to the sprite texture\n", 42);
+	else if (error_code == -7)
+		write(1, "Error: invalid color input\n", 28);
 }
 
 int		main(int ac, char **av)
@@ -65,11 +69,11 @@ int		main(int ac, char **av)
 		return (0);
 	}
 	mlx.win_ptr = mlx_new_window(mlx.mlx_ptr, cfg.width, cfg.height, "Cube3D");
-	mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img[0].img_ptr, 0, 0);
-	mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img[1].img_ptr, 100, 0);
-	mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img[2].img_ptr, 400, 0);
-	mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img[3].img_ptr, 0, 200);
-	mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img[4].img_ptr, 300, 300);
-	mlx_loop(mlx.mlx_ptr);
+	// mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img[0].img_ptr, 0, 0);
+	// mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img[1].img_ptr, 100, 0);
+	// mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img[2].img_ptr, 400, 0);
+	// mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img[3].img_ptr, 0, 200);
+	// mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img[4].img_ptr, 300, 300);
+	// mlx_loop(mlx.mlx_ptr);
 	return (0);
 }
