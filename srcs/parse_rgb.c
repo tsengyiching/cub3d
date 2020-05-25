@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/24 18:32:01 by yictseng          #+#    #+#             */
-/*   Updated: 2020/05/25 12:05:44 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/05/25 16:20:57 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		get_rgb(char *line, int *index)
 	(*index)++;
 	blue = ft_atoi_save_index(index, line);
 	if (!is_valid_color(red, green, blue))
-		return (-7);
+		return (-8);
 	res = (256 * 256 * red) + (256 * green) + blue;
 	return (res);
 }

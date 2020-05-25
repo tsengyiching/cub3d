@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 16:19:04 by yictseng          #+#    #+#             */
-/*   Updated: 2020/05/25 12:09:50 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/05/25 16:20:37 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ void	write_error(int error_code)
 		write(1, "Error: invalid path to the west texture\n", 40);
 	else if (error_code == -6)
 		write(1, "Error: invalid path to the east texture\n", 40);
-	else if (error_code == -6)
-		write(1, "Error: invalid path to the sprite texture\n", 42);
 	else if (error_code == -7)
+		write(1, "Error: invalid path to the sprite texture\n", 42);
+	else if (error_code == -8)
 		write(1, "Error: invalid color input\n", 28);
 }
 
