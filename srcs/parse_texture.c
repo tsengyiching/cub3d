@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 16:48:38 by yictseng          #+#    #+#             */
-/*   Updated: 2020/05/21 18:07:18 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/05/25 12:06:13 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int		get_texture_sprite(t_mlx *mlx, char *line)
 	return (1);
 }
 
-int		parse_texture(t_mlx *mlx, char *line)
+int		parse_texture(t_config *cfg, t_mlx *mlx, char *line)
 {
 	int	error_code;
 
@@ -99,6 +99,9 @@ int		parse_texture(t_mlx *mlx, char *line)
 			return (error_code);
 	if (line[0] == 'E' && line[1] == 'A')
 		if ((error_code = get_texture_ea(mlx, line + 2)) < 0)
+			return (error_code);
+	if (line[0] == 'C' || line[0] == 'F')
+		if ((error_code = parse_rgb(cfg, line)) < 0)
 			return (error_code);
 	if (line[0] == 'S')
 	{
