@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 16:19:04 by yictseng          #+#    #+#             */
-/*   Updated: 2020/05/25 16:20:37 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/06/23 21:48:56 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	init_config(t_config *cfg)
 	cfg->width = -1;
 	cfg->ceiling = -1;
 	cfg->floor = -1;
+	cfg->size_map = 0;
+	cfg->map = NULL;
 }
 
 void	write_error(int error_code)
@@ -38,6 +40,8 @@ void	write_error(int error_code)
 		write(1, "Error: invalid path to the sprite texture\n", 42);
 	else if (error_code == -8)
 		write(1, "Error: invalid color input\n", 28);
+	else if (error_code == -9)
+		write(1, "Error: malloc failed for map\n", 30);
 }
 
 int		main(int ac, char **av)
@@ -49,7 +53,7 @@ int		main(int ac, char **av)
 
 	if (ac != 2)
 	{
-		write(1, "Error : too few or too many arguments\n", 38);
+		write(1, "Error : can only have two arguments\n", 36);
 		return (0);
 	}
 	fd = open(av[1], O_RDONLY);
@@ -62,7 +66,7 @@ int		main(int ac, char **av)
 	init_config(&cfg);
 	mlx.mlx_ptr = mlx_init();
 	error_code = parsing(fd, &cfg, &mlx);
-	printf("err %d\n", error_code);
+	//printf("error code: %d\n", error_code);
 	if (error_code < 0)
 	{
 		write_error(error_code);
@@ -74,6 +78,9 @@ int		main(int ac, char **av)
 	// mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img[2].img_ptr, 400, 0);
 	// mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img[3].img_ptr, 0, 200);
 	// mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img[4].img_ptr, 300, 300);
-	// mlx_loop(mlx.mlx_ptr);
+	//mlx_loop(mlx.mlx_ptr);
+	// printf("map 0|%s|\n", cfg.map[0]);
+	// printf("map 1|%s|\n", cfg.map[1]);
+	// printf("map 2|%s|\n", cfg.map[2]);
 	return (0);
 }

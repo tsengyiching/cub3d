@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 15:48:43 by yictseng          #+#    #+#             */
-/*   Updated: 2020/05/25 10:56:41 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/06/23 21:40:54 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_config
 	int		width;
 	int		ceiling;
 	int		floor;
+	int		size_map;
 	char	**map;
 }			   t_config;
 
@@ -49,4 +50,6 @@ int		parse_texture(t_config *cfg, t_mlx *mlx, char *line);
 int		parse_rgb(t_config *cfg, char *line);
 int		ft_atoi(int i, char *line);
 int		ft_atoi_save_index(int *i, char *line);
+char	**ft_add_line_in_tab(char *line, char **tab);
+char	*ft_strdup(const char *s1);
 #endif

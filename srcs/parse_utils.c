@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_outils.c                                     :+:      :+:    :+:   */
+/*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 18:43:42 by yictseng          #+#    #+#             */
-/*   Updated: 2020/05/24 18:01:58 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/06/23 22:12:14 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,46 @@ int		ft_atoi_save_index(int *i, char *line)
 		(*i)++;
 	}
 	return (nb);
+}
+
+char	*ft_strdup(const char *s1)
+{
+	int		i;
+	int		len;
+	char	*dst;
+
+	i = 0;
+	len = ft_strlen(s1);
+	if (!(dst = (char *)malloc(sizeof(char) * (len + 1))))
+		return (NULL);
+	while (s1[i])
+	{
+		dst[i] = s1[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (dst);
+}
+
+char	**ft_add_line_in_tab(char *line, char **tab)
+{
+	char 	**dup;
+	int		i;
+
+	i = 0;
+	while (tab && tab[i])
+		i++;
+	if (!(dup = malloc(sizeof(char *) * (i + 2))))
+		return (NULL);
+	i = 0;
+	while (tab && tab[i])
+	{
+		dup[i] = tab[i];
+		i++;
+	}
+	dup[i] = ft_strdup(line);
+	i++;
+	dup[i] = NULL;
+	free(tab);
+	return (dup);
 }
