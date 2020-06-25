@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 16:19:04 by yictseng          #+#    #+#             */
-/*   Updated: 2020/06/23 21:48:56 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/06/25 16:52:29 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,25 @@ void	init_config(t_config *cfg)
 void	write_error(int error_code)
 {
 	if (error_code == -1)
-		write(1, "Error : missing space or having invalid character\n", 50);
+		write(1, "Error : Missing space or Having invalid character\n", 50);
 	else if (error_code == -2)
-		write(1, "Error: having invalid identifier\n", 34);
+		write(1, "Error: Having invalid identifier\n", 34);
 	else if (error_code == -3)
-		write(1, "Error: invalid path to the north texture\n", 41);
+		write(1, "Error: Invalid path to the north texture\n", 41);
 	else if (error_code == -4)
-		write(1, "Error: invalid path to the south texture\n", 41);
+		write(1, "Error: Invalid path to the south texture\n", 41);
 	else if (error_code == -5)
-		write(1, "Error: invalid path to the west texture\n", 40);
+		write(1, "Error: Invalid path to the west texture\n", 40);
 	else if (error_code == -6)
-		write(1, "Error: invalid path to the east texture\n", 40);
+		write(1, "Error: Invalid path to the east texture\n", 40);
 	else if (error_code == -7)
-		write(1, "Error: invalid path to the sprite texture\n", 42);
+		write(1, "Error: Invalid path to the sprite texture\n", 42);
 	else if (error_code == -8)
-		write(1, "Error: invalid color input\n", 28);
+		write(1, "Error: Invalid color input\n", 28);
 	else if (error_code == -9)
-		write(1, "Error: malloc failed for map\n", 30);
+		write(1, "Error: Memory allocation failure\n", 33);
+	else if (error_code == -10)
+		write(1, "Error: missing map or map is not closed with walls\n", 51);
 }
 
 int		main(int ac, char **av)
@@ -79,8 +81,5 @@ int		main(int ac, char **av)
 	// mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img[3].img_ptr, 0, 200);
 	// mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img[4].img_ptr, 300, 300);
 	//mlx_loop(mlx.mlx_ptr);
-	// printf("map 0|%s|\n", cfg.map[0]);
-	// printf("map 1|%s|\n", cfg.map[1]);
-	// printf("map 2|%s|\n", cfg.map[2]);
 	return (0);
 }

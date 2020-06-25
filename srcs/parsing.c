@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 16:15:15 by yictseng          #+#    #+#             */
-/*   Updated: 2020/06/23 22:12:18 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/06/25 16:52:53 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int		is_valid_char(char *line)
 {
-	if (line[0] == 'R'|| line[0] == 'N' || line[0] == 'S' || line[0] == 'W'
-	 || line[0] == 'E' || line[0] == 'F' || line[0] == 'C' || line[0] == '1'
-	 || line[0] == ' ' || line[0] == '\0')
+	if (line[0] == 'R' || line[0] == 'N' || line[0] == 'S' || line[0] == 'W'
+	|| line[0] == 'E' || line[0] == 'F' || line[0] == 'C' || line[0] == '1'
+	|| line[0] == ' ' || line[0] == '\0')
 		return (1);
 	return (0);
 }
@@ -36,7 +36,7 @@ int		is_wall(char *line)
 int		find_element(t_config *cfg, t_mlx *mlx, char *line)
 {
 	int		error_code;
-	
+
 	if (!is_valid_char(line))
 		return (-2);
 	if (line[0] == 'R')
@@ -52,32 +52,19 @@ int		find_element(t_config *cfg, t_mlx *mlx, char *line)
 	}
 	else if (line[0] == '1' || line[0] == ' ')
 	{
-		error_code = 2;
-		return (error_code);
+		if (is_wall(line))
+			return (2);
+		else
+			return (-10);
 	}
 	return (1);
 }
 
-int		parsing(int fd, t_config *cfg, t_mlx *mlx)
+int		get_map(int ret, int fd, t_config *cfg, char *line)
 {
-	char	*line;
 	char	**tab;
-	int		ret;
-	int		error_code;
 
-	ret = 1;
 	tab = NULL;
-	while (ret > 0)
-	{
-		ret = get_next_line(fd, &line);
-		error_code = find_element(cfg, mlx, line);
-		if (error_code < 0)
-			return (error_code);
-		if (error_code == 2)
-			break ;
-		free(line);
-		line = NULL;
-	}
 	while (ret > 0)
 	{
 		if (line != NULL)
@@ -91,10 +78,42 @@ int		parsing(int fd, t_config *cfg, t_mlx *mlx)
 			line = NULL;
 		}
 		ret = get_next_line(fd, &line);
+		if (!is_wall(line))
+			return (-10);
 		tab = cfg->map;
-		cfg->map = ft_add_line_in_tab(line, tab);
+		if (!(cfg->map = ft_add_line_in_tab(line, tab)))
+			return (-9);
 		free(line);
 		line = NULL;
 	}
+	return (1);
+}
+
+int		parsing(int fd, t_config *cfg, t_mlx *mlx)
+{
+	char	*line;
+	int		ret;
+	int		error_code;
+
+	ret = 1;
+	while (ret > 0)
+	{
+		ret = get_next_line(fd, &line);
+		error_code = find_element(cfg, mlx, line);
+		if (error_code < 0)
+			return (error_code);
+		if (error_code == 2)
+			break ;
+		free(line);
+		line = NULL;
+	}
+	if (ret > 0)
+	{
+		error_code = get_map(ret, fd, cfg, line);
+		if (error_code < 0)
+			return (error_code);
+	}
+	else if (ret == 0)
+		return (-10);
 	return (1);
 }
