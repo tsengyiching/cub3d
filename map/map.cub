@@ -1,4 +1,4 @@
-R 800 1000
+R 1920 1080
 
 NO ./textures/brick.xpm
 SO ./textures/stone.xpm

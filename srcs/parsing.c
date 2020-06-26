@@ -6,32 +6,11 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 16:15:15 by yictseng          #+#    #+#             */
-/*   Updated: 2020/06/25 16:52:53 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/06/26 16:28:31 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube3d.h"
-
-int		is_valid_char(char *line)
-{
-	if (line[0] == 'R' || line[0] == 'N' || line[0] == 'S' || line[0] == 'W'
-	|| line[0] == 'E' || line[0] == 'F' || line[0] == 'C' || line[0] == '1'
-	|| line[0] == ' ' || line[0] == '\0')
-		return (1);
-	return (0);
-}
-
-int		is_wall(char *line)
-{
-	int i;
-
-	i = 0;
-	while (line[i] == ' ')
-		i++;
-	if (line[i] == '1')
-		return (1);
-	return (0);
-}
 
 int		find_element(t_config *cfg, t_mlx *mlx, char *line)
 {
@@ -41,7 +20,7 @@ int		find_element(t_config *cfg, t_mlx *mlx, char *line)
 		return (-2);
 	if (line[0] == 'R')
 	{
-		if ((error_code = get_resolution(cfg, line)) < 0)
+		if ((error_code = parse_resolution(cfg, line)) < 0)
 			return (error_code);
 	}
 	else if (line[0] == 'N' || line[0] == 'S' || line[0] == 'W'
