@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 15:48:43 by yictseng          #+#    #+#             */
-/*   Updated: 2020/06/26 16:38:43 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/06/26 16:49:37 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,6 @@ int		ft_atoi_save_index(int *i, char *line);
 int		is_valid_char(char *line);
 int		is_wall(char *line);
 int		is_valid_color(int red, int green, int blue);
-char	**ft_add_line_in_tab(char *line, char **tab);
+char	**ft_stradd_back(char *line, char **tab);
 char	*ft_strdup(const char *s1);
 #endif

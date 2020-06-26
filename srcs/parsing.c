@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 16:15:15 by yictseng          #+#    #+#             */
-/*   Updated: 2020/06/26 16:28:31 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/06/26 16:48:59 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int		get_map(int ret, int fd, t_config *cfg, char *line)
 		if (!is_wall(line))
 			return (-10);
 		tab = cfg->map;
-		if (!(cfg->map = ft_add_line_in_tab(line, tab)))
+		if (!(cfg->map = ft_stradd_back(line, tab)))
 			return (-9);
 		free(line);
 		line = NULL;

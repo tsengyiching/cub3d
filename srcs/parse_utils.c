@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 18:43:42 by yictseng          #+#    #+#             */
-/*   Updated: 2020/06/24 16:52:32 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/06/26 16:49:22 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	*ft_strdup(const char *s1)
 	return (dst);
 }
 
-char	**ft_add_line_in_tab(char *line, char **tab)
+char	**ft_stradd_back(char *line, char **tab)
 {
 	char	**dup;
 	int		i;
