@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 15:48:43 by yictseng          #+#    #+#             */
-/*   Updated: 2020/06/26 16:49:37 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/02 15:02:08 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int		get_texture_ea(t_mlx *mlx, char *line);
 int		get_texture_s(t_mlx *mlx, char *line);
 int		ft_atoi(int i, char *line);
 int		ft_atoi_save_index(int *i, char *line);
-int		is_valid_char(char *line);
+int		is_valid_identifier(char *line);
 int		is_wall(char *line);
 int		is_valid_color(int red, int green, int blue);
 char	**ft_stradd_back(char *line, char **tab);
