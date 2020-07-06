@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 15:48:43 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/02 15:02:08 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/06 18:42:22 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,12 @@ typedef struct s_config
 	int		width;
 	int		ceiling;
 	int		floor;
-	int		size_map;
+	int		player;
+	int		zero;
+	int		map_rows;
+	int		pos_x;
+	int		pos_y;
+	int		player_pos;
 	char	**map;
 }			   t_config;
 
@@ -51,11 +56,13 @@ int		get_texture_no(t_mlx *mlx, char *line);
 int		get_texture_we(t_mlx *mlx, char *line);
 int		get_texture_ea(t_mlx *mlx, char *line);
 int		get_texture_s(t_mlx *mlx, char *line);
+int		check_map(t_config *cfg);
 int		ft_atoi(int i, char *line);
 int		ft_atoi_save_index(int *i, char *line);
 int		is_valid_identifier(char *line);
 int		is_wall(char *line);
 int		is_valid_color(int red, int green, int blue);
+int		is_valid_elem(char **map, int x, int y);
 char	**ft_stradd_back(char *line, char **tab);
 char	*ft_strdup(const char *s1);
 #endif

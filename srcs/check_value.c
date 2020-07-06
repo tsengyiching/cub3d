@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check.c                                            :+:      :+:    :+:   */
+/*   check_value.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 16:27:38 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/02 15:02:09 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/02 15:11:46 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,15 @@ int		is_valid_color(int red, int green, int blue)
 	if (red > 255 || green > 255 || blue > 255)
 		return (0);
 	if (red == -1 || green == -1 || blue == -1)
+		return (0);
+	return (1);
+}
+
+int		is_valid_elem(char **map, int x, int y)
+{
+	if (map[x][y] != '0' && map[x][y] != '1' && map[x][y] != '2'
+	&& map[x][y] != ' ' && map[x][y] != 'N' && map[x][y] != 'S'
+	&& map[x][y] != 'W' && map[x][y] != 'E')
 		return (0);
 	return (1);
 }

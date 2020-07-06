@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 16:15:15 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/02 15:02:34 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/03 11:20:23 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,12 +88,13 @@ int		parsing(int fd, t_config *cfg, t_mlx *mlx)
 	}
 	if (ret > 0)
 	{
-		error_code = get_map(ret, fd, cfg, line);
-		if (error_code < 0)
+		if ((error_code = get_map(ret, fd, cfg, line)) < 0)
 			return (error_code);
 	}
 	else if (ret == 0)
 		return (-10);
 	close(fd);
+	if ((error_code = check_map(cfg)) < 0)
+		return (error_code);
 	return (1);
 }

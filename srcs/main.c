@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 16:19:04 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/02 14:53:31 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/06 18:47:36 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,11 @@ void	init_config(t_config *cfg)
 	cfg->width = -1;
 	cfg->ceiling = -1;
 	cfg->floor = -1;
-	cfg->size_map = 0;
+	cfg->zero = 0;
+	cfg->map_rows = 0;
+	cfg->pos_x = 0;
+	cfg->pos_y = 0;
+	cfg->player_pos = 0;
 	cfg->map = NULL;
 }
 
@@ -43,7 +47,19 @@ void	write_error(int error_code)
 	else if (error_code == -9)
 		write(1, "Error: Memory allocation failure\n", 33);
 	else if (error_code == -10)
-		write(1, "Error: missing map or map is not closed with walls\n", 51);
+		write(1, "Error: missing map or map is not the last element\n", 50);
+	else if (error_code == -11)
+		write(1, "Error: Map has unvalid element\n", 32);
+	else if (error_code == -12)
+		write(1, "Error: Map should have only one starting position\n", 50);
+	else if (error_code == -13)
+		write(1, "Error: Map is not closed with walls (left)\n", 43);
+	else if (error_code == -14)
+		write(1, "Error: Map is not closed with walls (right)\n", 44);
+	else if (error_code == -15)
+		write(1, "Error: Map is not closed with walls (up)\n", 41);
+	else if (error_code == -16)
+		write(1, "Error: Map is not closed with walls (down)\n", 43);
 }
 
 int		main(int ac, char **av)
@@ -79,6 +95,9 @@ int		main(int ac, char **av)
 	mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img[2].img_ptr, 400, 0);
 	mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img[3].img_ptr, 0, 200);
 	mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img[4].img_ptr, 300, 300);
-	mlx_loop(mlx.mlx_ptr);
+	// printf("%c\n", cfg.player_pos);
+	// printf("%d\n", cfg.pos_x);
+	// printf("%d\n", cfg.pos_y);
+	//mlx_loop(mlx.mlx_ptr);
 	return (0);
 }
