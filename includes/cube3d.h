@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 15:48:43 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/06 18:42:22 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/08 16:22:41 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,10 @@ typedef struct s_config
 	int		ceiling;
 	int		floor;
 	int		player;
-	int		zero;
 	int		map_rows;
-	int		pos_x;
-	int		pos_y;
-	int		player_pos;
+	float	pos_x;
+	float	pos_y;
+	int		player_dir;
 	char	**map;
 }			   t_config;
 

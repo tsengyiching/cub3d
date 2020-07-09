@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 16:19:04 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/06 18:47:36 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/08 22:27:23 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,10 @@ void	init_config(t_config *cfg)
 	cfg->width = -1;
 	cfg->ceiling = -1;
 	cfg->floor = -1;
-	cfg->zero = 0;
 	cfg->map_rows = 0;
 	cfg->pos_x = 0;
 	cfg->pos_y = 0;
-	cfg->player_pos = 0;
+	cfg->player_dir = 0;
 	cfg->map = NULL;
 }
 

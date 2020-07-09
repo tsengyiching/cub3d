@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 15:06:28 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/06 18:50:45 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/08 16:22:42 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ int		check_map_elem(t_config *cfg)
 			if (cfg->map[x][y] == 'N' || cfg->map[x][y] == 'S'
 			|| cfg->map[x][y] == 'W' || cfg->map[x][y] == 'E')
 			{
-				cfg->player_pos = cfg->map[x][y];
-				cfg->pos_x = x;
-				cfg->pos_y = y;
+				cfg->player_dir = cfg->map[x][y];
+				cfg->pos_x = x + 0.5;
+				cfg->pos_y = y + 0.5;
 				cfg->player++;
 			}
 			y++;
@@ -104,11 +104,10 @@ int		is_valid_map(t_config *cfg)
 		while (cfg->map[x][y])
 		{
 			if (cfg->map[x][y] == '0' || cfg->map[x][y] == '2'
-				|| cfg->map[x][y] == cfg->player_pos)
+				|| cfg->map[x][y] == cfg->player_dir)
 			{
 				if ((error_code = check_wall(x, y, cfg)) < 0)
 					return (error_code);
-				cfg->zero++;
 			}
 			y++;
 		}
@@ -125,8 +124,6 @@ int		check_map(t_config *cfg)
 		return (error_code);
 	if ((error_code = is_valid_map(cfg)) < 0)
 		return (error_code);
-	if (cfg->zero == 0)
-		return (-17);
 	if (cfg->player > 1)
 		return (-12);
 	if (cfg->player < 1)
