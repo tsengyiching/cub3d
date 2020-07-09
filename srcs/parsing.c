@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 16:15:15 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/09 16:15:29 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/09 21:24:11 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int		find_identifier(t_config *cfg, t_mlx *mlx, char *line)
 {
 	int		error_code;
 
+	error_code = 0;
 	if (!is_valid_identifier(line))
 		return (-3);
 	if (line[0] == 'R')
@@ -49,17 +50,19 @@ int		get_map(int ret, int fd, t_config *cfg, char *line)
 		if (line != NULL)
 		{
 			if (!(cfg->map = malloc(sizeof(char *) * 2)))
-				return (0);
+				return (-14);
 			if (!(cfg->map[0] = ft_strdup(line)))
-				return (0);
+				return (-14);
 			cfg->map[1] = NULL;
 			free(line);
 			line = NULL;
 		}
 		ret = get_next_line(fd, &line);
+		if (!is_wall(line))
+			return (-13);
 		tab = cfg->map;
 		if (!(cfg->map = ft_stradd_back(line, tab)))
-			return (0);
+			return (-14);
 		free(line);
 		line = NULL;
 	}
@@ -85,11 +88,11 @@ int		parsing(int fd, t_config *cfg, t_mlx *mlx)
 		line = NULL;
 	}
 	if (ret > 0)
-		if (!get_map(ret, fd, cfg, line))
-			return (-14);
+		if ((error_code = get_map(ret, fd, cfg, line)) < 0)
+			return (error_code);
 	if (ret == 0)
 		return (-15);
-	if ((error_code = check_map(cfg)) < 0)
+	if ((error_code = check_map(cfg, mlx)) < 0)
 		return (error_code);
 	return (1);
 }

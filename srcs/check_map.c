@@ -6,13 +6,13 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 15:06:28 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/09 15:47:57 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/09 21:34:48 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube3d.h"
 
-int		check_map_elem(t_config *cfg)
+int		check_map_elem(t_config *cfg, t_mlx *mlx)
 {
 	int x;
 	int	y;
@@ -27,7 +27,12 @@ int		check_map_elem(t_config *cfg)
 				return (0);
 			if (cfg->map[x][y] == 'N' || cfg->map[x][y] == 'S'
 			|| cfg->map[x][y] == 'W' || cfg->map[x][y] == 'E')
+			{
 				cfg->player++;
+				mlx->player_dir = cfg->map[x][y];
+				mlx->player_posx = x + 0.5;
+				mlx->player_posy = y + 0.5;
+			}
 			y++;
 		}
 		x++;
@@ -86,20 +91,21 @@ int		check_wall(int x, int y, t_config *cfg)
 	return (1);
 }
 
-int		is_valid_map(t_config *cfg)
+int		is_valid_map(t_config *cfg, t_mlx *mlx)
 {
 	int		x;
 	int		y;
 	int		error_code;
 
 	x = 0;
+	error_code = 0;
 	while (cfg->map[x])
 	{
 		y = 0;
 		while (cfg->map[x][y])
 		{
 			if (cfg->map[x][y] == '0' || cfg->map[x][y] == '2'
-				|| cfg->map[x][y] == cfg->player_dir)
+				|| cfg->map[x][y] == mlx->player_dir)
 			{
 				if ((error_code = check_wall(x, y, cfg)) < 0)
 					return (error_code);
@@ -111,15 +117,16 @@ int		is_valid_map(t_config *cfg)
 	return (1);
 }
 
-int		check_map(t_config *cfg)
+int		check_map(t_config *cfg, t_mlx *mlx)
 {
 	int		error_code;
 
-	if (!check_map_elem(cfg))
+	error_code = 0;
+	if (!check_map_elem(cfg, mlx))
 		return (-16);
 	if (cfg->player != 1)
 		return (-17);
-	if ((error_code = is_valid_map(cfg)) < 0)
+	if ((error_code = is_valid_map(cfg, mlx)) < 0)
 		return (error_code);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 18:42:40 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/09 15:50:26 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/09 20:40:39 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int		parse_texture(t_config *cfg, t_mlx *mlx, char *line)
 {
 	int	error_code;
 
+	error_code = 0;
 	if (line[0] == 'N' && line[1] == 'O')
 		if (!get_texture_no(mlx, line + 2))
 			return (-5);

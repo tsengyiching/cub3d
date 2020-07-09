@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 16:19:04 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/09 16:11:40 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/09 21:34:33 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,13 @@ void	init_config(t_config *cfg)
 	cfg->ceiling = -1;
 	cfg->floor = -1;
 	cfg->map_rows = 0;
-	cfg->pos_x = 0;
-	cfg->pos_y = 0;
-	cfg->player_dir = 0;
 	cfg->map = NULL;
+}
+
+void	init_mlx(t_mlx *mlx)
+{
+	mlx->player_posx = 0;
+	mlx->player_posy = 0;
 }
 
 int		write_error(int error_code)
@@ -85,20 +88,18 @@ int		main(int ac, char **av)
 	if (fd == -1)
 		return (write_error(-2));
 	init_config(&cfg);
+	init_mlx(&mlx);
 	mlx.mlx_ptr = mlx_init();
 	error_code = parsing(fd, &cfg, &mlx);
 	close(fd);
 	if (error_code < 0)
 		return (write_error(error_code));
 	mlx.win_ptr = mlx_new_window(mlx.mlx_ptr, cfg.width, cfg.height, "Cube3D");
-	mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img[0].img_ptr, 0, 0);
-	mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img[1].img_ptr, 100, 0);
-	mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img[2].img_ptr, 400, 0);
-	mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img[3].img_ptr, 0, 200);
-	mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img[4].img_ptr, 300, 300);
-	// printf("%c\n", cfg.player_pos);
-	// printf("%d\n", cfg.pos_x);
-	// printf("%d\n", cfg.pos_y);
+	// mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img[0].img_ptr, 0, 0);
+	// mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img[1].img_ptr, 100, 0);
+	// mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img[2].img_ptr, 400, 0);
+	// mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img[3].img_ptr, 0, 200);
+	// mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img[4].img_ptr, 300, 300);
 	//mlx_loop(mlx.mlx_ptr);
 	return (0);
 }
