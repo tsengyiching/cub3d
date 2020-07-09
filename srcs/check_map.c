@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 15:06:28 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/08 16:22:42 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/09 15:47:57 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,10 @@ int		check_map_elem(t_config *cfg)
 		while (cfg->map[x][y])
 		{
 			if (!is_valid_elem(cfg->map, x, y))
-				return (-11);
+				return (0);
 			if (cfg->map[x][y] == 'N' || cfg->map[x][y] == 'S'
 			|| cfg->map[x][y] == 'W' || cfg->map[x][y] == 'E')
-			{
-				cfg->player_dir = cfg->map[x][y];
-				cfg->pos_x = x + 0.5;
-				cfg->pos_y = y + 0.5;
 				cfg->player++;
-			}
 			y++;
 		}
 		x++;
@@ -81,13 +76,13 @@ int		check_vertical_down(int x, int y, t_config *cfg)
 int		check_wall(int x, int y, t_config *cfg)
 {
 	if (!check_horizotal_left(x, y, cfg))
-		return (-13);
+		return (-18);
 	if (!check_horizotal_right(x, y, cfg))
-		return (-14);
+		return (-19);
 	if (!check_vertical_up(x, y, cfg))
-		return (-15);
+		return (-20);
 	if (!check_vertical_down(x, y, cfg))
-		return (-16);
+		return (-21);
 	return (1);
 }
 
@@ -120,13 +115,11 @@ int		check_map(t_config *cfg)
 {
 	int		error_code;
 
-	if ((error_code = check_map_elem(cfg)) < 0)
-		return (error_code);
+	if (!check_map_elem(cfg))
+		return (-16);
+	if (cfg->player != 1)
+		return (-17);
 	if ((error_code = is_valid_map(cfg)) < 0)
 		return (error_code);
-	if (cfg->player > 1)
-		return (-12);
-	if (cfg->player < 1)
-		return (-12);
 	return (1);
 }

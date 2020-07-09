@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 16:15:15 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/09 12:00:27 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/09 15:34:46 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ int		find_identifier(t_config *cfg, t_mlx *mlx, char *line)
 	int		error_code;
 
 	if (!is_valid_identifier(line))
-		return (-2);
+		return (-3);
 	if (line[0] == 'R')
 	{
-		if ((error_code = parse_resolution(cfg, line)) < 0)
-			return (error_code);
+		if (!parse_resolution(cfg, line))
+			return (-4);
 	}
 	else if (line[0] == 'N' || line[0] == 'S' || line[0] == 'W'
 		|| line[0] == 'E' || line[0] == 'C' || line[0] == 'F')
@@ -34,7 +34,7 @@ int		find_identifier(t_config *cfg, t_mlx *mlx, char *line)
 		if (is_wall(line))
 			return (2);
 		else
-			return (-10);
+			return (-13);
 	}
 	return (1);
 }
@@ -49,9 +49,9 @@ int		get_map(int ret, int fd, t_config *cfg, char *line)
 		if (line != NULL)
 		{
 			if (!(cfg->map = malloc(sizeof(char *) * 2)))
-				return (-9);
+				return (0);
 			if (!(cfg->map[0] = ft_strdup(line)))
-				return (-9);
+				return (0);
 			cfg->map[1] = NULL;
 			free(line);
 			line = NULL;
@@ -59,7 +59,7 @@ int		get_map(int ret, int fd, t_config *cfg, char *line)
 		ret = get_next_line(fd, &line);
 		tab = cfg->map;
 		if (!(cfg->map = ft_stradd_back(line, tab)))
-			return (-9);
+			return (0);
 		free(line);
 		line = NULL;
 	}
@@ -86,11 +86,11 @@ int		parsing(int fd, t_config *cfg, t_mlx *mlx)
 	}
 	if (ret > 0)
 	{
-		if ((error_code = get_map(ret, fd, cfg, line)) < 0)
-			return (error_code);
+		if (!get_map(ret, fd, cfg, line))
+			return (-14);
 	}
 	else if (ret == 0)
-		return (-10);
+		return (-15);
 	close(fd);
 	if ((error_code = check_map(cfg)) < 0)
 		return (error_code);
