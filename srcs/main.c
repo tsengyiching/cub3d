@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 16:19:04 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/09 15:48:15 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/09 16:11:40 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int		main(int ac, char **av)
 	init_config(&cfg);
 	mlx.mlx_ptr = mlx_init();
 	error_code = parsing(fd, &cfg, &mlx);
+	close(fd);
 	if (error_code < 0)
 		return (write_error(error_code));
 	mlx.win_ptr = mlx_new_window(mlx.mlx_ptr, cfg.width, cfg.height, "Cube3D");
