@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 15:06:28 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/09 21:34:48 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/10 16:08:48 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ int		check_map_elem(t_config *cfg, t_mlx *mlx)
 			|| cfg->map[x][y] == 'W' || cfg->map[x][y] == 'E')
 			{
 				cfg->player++;
-				mlx->player_dir = cfg->map[x][y];
-				mlx->player_posx = x + 0.5;
-				mlx->player_posy = y + 0.5;
+				mlx->starting_dir = cfg->map[x][y];
+				mlx->starting_posx = x + 0.5;
+				mlx->starting_posy = y + 0.5;
 			}
 			y++;
 		}
@@ -105,7 +105,7 @@ int		is_valid_map(t_config *cfg, t_mlx *mlx)
 		while (cfg->map[x][y])
 		{
 			if (cfg->map[x][y] == '0' || cfg->map[x][y] == '2'
-				|| cfg->map[x][y] == mlx->player_dir)
+				|| cfg->map[x][y] == mlx->starting_dir)
 			{
 				if ((error_code = check_wall(x, y, cfg)) < 0)
 					return (error_code);

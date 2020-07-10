@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 15:48:43 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/09 21:38:25 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/10 18:49:56 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "../minilibx/mlx.h"
 # include "get_next_line.h"
+# include <math.h>
 
 typedef struct	s_image
 {
@@ -32,13 +33,33 @@ typedef struct 	s_mlx
 	void		*mlx_ptr;
 	void		*win_ptr;
 	t_image		img[6];
-	char		player_dir;
-	double		player_dirx;
-	double		player_diry;
-	double		camera_x;
-	double		camera_y;
-	double		player_posx;
-	double		player_posy;
+	char		starting_dir;
+	double		starting_posx;
+	double		starting_posy;
+	double		vector_dirx;
+	double		vector_diry;
+	double		planex;
+	double		planey;
+	double		camerax;
+	double		ray_dirx;
+	double		ray_diry;
+	double		delta_distx;
+	double		delta_disty;
+	double		perp_wall_dist;
+	int			stepx;
+	int			stepy;
+	int			mapx;
+	int			mapy;
+	int			hit;
+	int			side;
+	double		side_distx;
+	double		side_disty;
+	int			line_height;
+	int			draw_start;
+	int			draw_end;
+	int			color;
+	double		w;
+	double		h;
 }				t_mlx;
 
 typedef struct s_config
@@ -66,6 +87,9 @@ int		is_valid_identifier(char *line);
 int		is_wall(char *line);
 int		is_valid_color(int red, int green, int blue);
 int		is_valid_elem(char **map, int x, int y);
+void	init_plane_position(t_mlx *mlx);
+void	init_vector_direction(t_mlx *mlx);
+void	do_raycasting(t_mlx *mlx, t_config *cfg);
 char	**ft_stradd_back(char *line, char **tab);
 char	*ft_strdup(const char *s1);
 #endif

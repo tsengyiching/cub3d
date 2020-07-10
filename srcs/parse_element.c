@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 18:42:40 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/09 20:40:39 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/10 18:43:31 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int		parse_resolution(t_config *cfg, char *line)
 	while (line[i] == ' ')
 		i++;
 	if (line[i] >= '0' && line[i] <= '9')
-		cfg->height = ft_atoi(i, line);
+		cfg->width = ft_atoi(i, line);
 	while (line[i] >= '0' && line[i] <= '9')
 		i++;
 	if (line[i] != ' ')
@@ -112,7 +112,7 @@ int		parse_resolution(t_config *cfg, char *line)
 	while (line[i] == ' ')
 		i++;
 	if (line[i] >= '0' && line[i] <= '9')
-		cfg->width = ft_atoi(i, line);
+		cfg->height = ft_atoi(i, line);
 	while (line[i] >= '0' && line[i] <= '9')
 		i++;
 	if (line[i] != '\0')
