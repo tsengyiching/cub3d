@@ -6,13 +6,13 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 16:19:04 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/10 18:08:05 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/11 17:00:02 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube3d.h"
 
-void	init_config(t_config *cfg)
+void	init_struct(t_config *cfg, t_mlx *mlx)
 {
 	cfg->height = -1;
 	cfg->width = -1;
@@ -20,12 +20,8 @@ void	init_config(t_config *cfg)
 	cfg->floor = -1;
 	cfg->map_rows = 0;
 	cfg->map = NULL;
-}
-
-void	init_mlx(t_mlx *mlx)
-{
-	mlx->starting_posx = 0;
-	mlx->starting_posy = 0;
+	mlx->start_posx = 0;
+	mlx->start_posy = 0;
 }
 
 int		write_error(int error_code)
@@ -87,8 +83,7 @@ int		main(int ac, char **av)
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 		return (write_error(-2));
-	init_config(&cfg);
-	init_mlx(&mlx);
+	init_struct(&cfg, &mlx);
 	mlx.mlx_ptr = mlx_init();
 	error_code = parsing(fd, &cfg, &mlx);
 	close(fd);

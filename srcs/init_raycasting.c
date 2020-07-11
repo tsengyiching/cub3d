@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/09 21:35:28 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/10 18:06:11 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/11 16:59:30 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 void	init_plane_position(t_mlx *mlx)
 {
-	if (mlx->starting_dir == 'N')
+	if (mlx->start_dir == 'N')
 	{
 		mlx->planex = 0;
 		mlx->planey = 0.66;
 	}
-	if (mlx->starting_dir == 'S')
+	if (mlx->start_dir == 'S')
 	{
 		mlx->planex = 0;
 		mlx->planey = -0.66;
 	}
-	if (mlx->starting_dir == 'W')
+	if (mlx->start_dir == 'W')
 	{
 		mlx->planex = -0.66;
 		mlx->planey = 0;
 	}
-	if (mlx->starting_dir == 'E')
+	if (mlx->start_dir == 'E')
 	{
 		mlx->planex = 0.66;
 		mlx->planey = 0;
@@ -38,22 +38,22 @@ void	init_plane_position(t_mlx *mlx)
 
 void	init_vector_direction(t_mlx *mlx)
 {
-	if (mlx->starting_dir == 'N')
+	if (mlx->start_dir == 'N')
 	{
 		mlx->vector_dirx = -1;
 		mlx->vector_diry = 0;
 	}
-	if (mlx->starting_dir == 'S')
+	if (mlx->start_dir == 'S')
 	{
 		mlx->vector_dirx = 1;
 		mlx->vector_diry = 0;
 	}
-	if (mlx->starting_dir == 'W')
+	if (mlx->start_dir == 'W')
 	{
 		mlx->vector_dirx = 0;
 		mlx->vector_diry = -1;
 	}
-	if (mlx->starting_dir == 'E')
+	if (mlx->start_dir == 'E')
 	{
 		mlx->vector_dirx = 0;
 		mlx->vector_diry = 1;

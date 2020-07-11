@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 15:48:43 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/10 18:49:56 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/11 15:59:32 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ typedef struct 	s_mlx
 	void		*mlx_ptr;
 	void		*win_ptr;
 	t_image		img[6];
-	char		starting_dir;
-	double		starting_posx;
-	double		starting_posy;
+	char		start_dir;
+	double		start_posx;
+	double		start_posy;
 	double		vector_dirx;
 	double		vector_diry;
 	double		planex;
@@ -58,8 +58,8 @@ typedef struct 	s_mlx
 	int			draw_start;
 	int			draw_end;
 	int			color;
-	double		w;
-	double		h;
+	double		width;
+	double		height;
 }				t_mlx;
 
 typedef struct s_config
