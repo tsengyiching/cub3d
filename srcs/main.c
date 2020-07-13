@@ -6,11 +6,11 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 16:19:04 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/11 17:00:02 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/13 18:23:08 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cube3d.h"
+#include "../includes/cub3d.h"
 
 void	init_struct(t_config *cfg, t_mlx *mlx)
 {
@@ -68,7 +68,25 @@ int		write_error(int error_code)
 		write(1, "Error: Map is not closed with walls (up)\n", 41);
 	else if (error_code == -21)
 		write(1, "Error: Map is not closed with walls (down)\n", 43);
+	else if (error_code == -22)
+		write(1, "Error: Invalid file extension\n", 30);
 	return (0);
+}
+
+int		is_valide_file(char *str)
+{
+	int		len;
+	
+	len = ft_strlen(str);
+	if (str[len - 1] != 'b')
+		return (0);
+	if (str[len - 2] != 'u')
+		return (0);
+	if (str[len - 3] != 'c')
+		return (0);
+	if (str[len - 4] != '.')
+		return (0);
+	return (1);
 }
 
 int		main(int ac, char **av)
@@ -80,6 +98,8 @@ int		main(int ac, char **av)
 
 	if (ac != 2)
 		return (write_error(-1));
+	if (!is_valide_file(av[1]))
+		return (write_error(-22));
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 		return (write_error(-2));

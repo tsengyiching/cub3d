@@ -6,11 +6,11 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 16:48:38 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/09 15:49:36 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/13 15:58:21 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cube3d.h"
+#include "../includes/cub3d.h"
 
 int		get_texture_no(t_mlx *mlx, char *line)
 {

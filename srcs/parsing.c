@@ -6,11 +6,11 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 16:15:15 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/10 11:52:15 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/13 15:58:42 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cube3d.h"
+#include "../includes/cub3d.h"
 
 int		find_identifier(t_config *cfg, t_mlx *mlx, char *line)
 {

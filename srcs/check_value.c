@@ -6,11 +6,11 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 16:27:38 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/02 15:11:46 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/13 15:57:58 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cube3d.h"
+#include "../includes/cub3d.h"
 
 int		is_valid_identifier(char *line)
 {

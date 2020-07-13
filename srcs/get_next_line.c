@@ -6,11 +6,11 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 21:20:32 by yictseng          #+#    #+#             */
-/*   Updated: 2020/05/04 21:47:36 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/13 15:58:09 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cube3d.h"
+#include "../includes/cub3d.h"
 
 static int	ft_read_line(t_stock *save, int fd)
 {

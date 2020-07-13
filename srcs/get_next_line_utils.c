@@ -6,11 +6,11 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 21:22:31 by yictseng          #+#    #+#             */
-/*   Updated: 2020/05/04 21:47:27 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/13 15:58:15 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cube3d.h"
+#include "../includes/cub3d.h"
 
 size_t	ft_strlen(const char *s)
 {

@@ -6,11 +6,11 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/09 21:35:28 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/11 16:59:30 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/13 15:58:27 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cube3d.h"
+#include "../includes/cub3d.h"
 
 void	init_plane_position(t_mlx *mlx)
 {

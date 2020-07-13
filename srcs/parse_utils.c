@@ -6,11 +6,11 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 18:43:42 by yictseng          #+#    #+#             */
-/*   Updated: 2020/06/26 16:49:22 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/13 15:59:18 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cube3d.h"
+#include "../includes/cub3d.h"
 
 int		ft_atoi(int i, char *line)
 {
