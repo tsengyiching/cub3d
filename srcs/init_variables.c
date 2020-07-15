@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 13:57:22 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/15 13:57:24 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/15 17:05:08 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ void	init_struct(t_config *cfg, t_mlx *mlx)
 	cfg->ceiling = -1;
 	cfg->floor = -1;
 	cfg->map_rows = 0;
-	cfg->map = NULL;
+	mlx->map = NULL;
 	mlx->start_posx = 0;
 	mlx->start_posy = 0;
-	mlx->movespeed = 0.5;
-	mlx->rotspeed = 0.3;
+	mlx->movespeed = 0.08;
+	mlx->rotspeed = 0.03;
 }
 
 void	init_plane_position(t_mlx *mlx)

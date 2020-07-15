@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 15:57:17 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/15 14:37:50 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/15 17:55:58 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,13 @@
 # include "get_next_line.h"
 # include <math.h>
 
-# define KEY_W		13
-# define KEY_A		0
-# define KEY_S		1
-# define KEY_D		2
-# define KEY_LEFT	123
-# define KEY_RIGHT	124
+# define KEY_W				13
+# define KEY_A				0
+# define KEY_S				1
+# define KEY_D				2
+# define KEY_ARROW_LEFT		123
+# define KEY_ARROW_RIGHT	124
+# define KEY_ESC			53
 
 typedef struct		s_image
 {
@@ -51,13 +52,17 @@ typedef struct		s_mlx
 	void			*mlx_ptr;
 	void			*win_ptr;
 	t_image			img[6];
+	t_key			key;
+	char			**map;
 	char			start_dir;
 	double			start_posx;
 	double			start_posy;
 	double			vector_dirx;
 	double			vector_diry;
+	double			old_dirx;
 	double			planex;
 	double			planey;
+	double			old_planex;
 	double			camerax;
 	double			ray_dirx;
 	double			ray_diry;
@@ -90,7 +95,6 @@ typedef struct		s_config
 	int				floor;
 	int				player;
 	int				map_rows;
-	char			**map;
 }					t_config;
 
 int					parsing(int fd, t_config *cfg, t_mlx *mlx);
@@ -110,12 +114,17 @@ int					is_valid_elem(char **map, int x, int y);
 void				init_struct(t_config *cfg, t_mlx *mlx);
 void				init_plane_position(t_mlx *mlx);
 void				init_vector_direction(t_mlx *mlx);
-void				find_walls(int *hit, t_mlx *mlx, t_config *cfg);
+void				find_walls(int *hit, t_mlx *mlx);
 void				calcul_perp_wall_dist(t_mlx *mlx);
 void				calcul_pixel_to_fill_in_stripe(t_mlx *mlx);
-void				draw_walls(int hor, t_config *cfg, t_mlx *mlx);
-void				run_raycasting(t_mlx *mlx, t_config *cfg);
-int					run_cub3d(t_config *cfg, t_mlx *mlx);
+void				draw_walls(int hor, t_mlx *mlx);
+void				run_raycasting(t_mlx *mlx);
+int					run_cub3d(t_mlx *mlx);
+int					press_key(int key, t_mlx *mlx);
+int					release_key(int key, t_mlx *mlx);
+void				move_vertical(t_mlx *mlx);
+void				move_horizontal(t_mlx *mlx);
+void				rotate_view(t_mlx *mlx);
 char				**ft_stradd_back(char *line, char **tab);
 char				*ft_strdup(const char *s1);
 #endif

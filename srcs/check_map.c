@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 15:06:28 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/13 15:57:51 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/15 16:47:13 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,18 @@ int		check_map_elem(t_config *cfg, t_mlx *mlx)
 	int	y;
 
 	x = 0;
-	while (cfg->map[x])
+	while (mlx->map[x])
 	{
 		y = 0;
-		while (cfg->map[x][y])
+		while (mlx->map[x][y])
 		{
-			if (!is_valid_elem(cfg->map, x, y))
+			if (!is_valid_elem(mlx->map, x, y))
 				return (0);
-			if (cfg->map[x][y] == 'N' || cfg->map[x][y] == 'S'
-			|| cfg->map[x][y] == 'W' || cfg->map[x][y] == 'E')
+			if (mlx->map[x][y] == 'N' || mlx->map[x][y] == 'S'
+			|| mlx->map[x][y] == 'W' || mlx->map[x][y] == 'E')
 			{
 				cfg->player++;
-				mlx->start_dir = cfg->map[x][y];
+				mlx->start_dir = mlx->map[x][y];
 				mlx->start_posx = x + 0.5;
 				mlx->start_posy = y + 0.5;
 			}
@@ -41,52 +41,52 @@ int		check_map_elem(t_config *cfg, t_mlx *mlx)
 	return (1);
 }
 
-int		check_horizotal_left(int x, int y, t_config *cfg)
+int		check_horizotal_left(int x, int y, t_mlx *mlx)
 {
-	while (y > 0 && cfg->map[x][y] != '1' && cfg->map[x][y] != ' ')
+	while (y > 0 && mlx->map[x][y] != '1' && mlx->map[x][y] != ' ')
 		y--;
-	if (cfg->map[x][y] != '1')
+	if (mlx->map[x][y] != '1')
 		return (0);
 	return (1);
 }
 
-int		check_horizotal_right(int x, int y, t_config *cfg)
+int		check_horizotal_right(int x, int y, t_mlx *mlx)
 {
-	while (y > 0 && cfg->map[x][y] != '1' && cfg->map[x][y] != ' ')
+	while (y > 0 && mlx->map[x][y] != '1' && mlx->map[x][y] != ' ')
 		y++;
-	if (cfg->map[x][y] != '1')
+	if (mlx->map[x][y] != '1')
 		return (0);
 	return (1);
 }
 
-int		check_vertical_up(int x, int y, t_config *cfg)
+int		check_vertical_up(int x, int y, t_mlx *mlx)
 {
-	while (x > 0 && cfg->map[x][y] != '1' && cfg->map[x][y] != ' ')
+	while (x > 0 && mlx->map[x][y] != '1' && mlx->map[x][y] != ' ')
 		x--;
-	if (cfg->map[x][y] != '1')
+	if (mlx->map[x][y] != '1')
 		return (0);
 	return (1);
 }
 
-int		check_vertical_down(int x, int y, t_config *cfg)
+int		check_vertical_down(int x, int y, t_config *cfg, t_mlx *mlx)
 {
-	while (x < cfg->map_rows && cfg->map[x][y] != '1' && cfg->map[x][y] != ' '
-		&& cfg->map[x][y] != '\0')
+	while (x < cfg->map_rows && mlx->map[x][y] != '1' && mlx->map[x][y] != ' '
+		&& mlx->map[x][y] != '\0')
 		x++;
-	if (cfg->map[x][y] != '1')
+	if (mlx->map[x][y] != '1')
 		return (0);
 	return (1);
 }
 
-int		check_wall(int x, int y, t_config *cfg)
+int		check_wall(int x, int y, t_config *cfg, t_mlx *mlx)
 {
-	if (!check_horizotal_left(x, y, cfg))
+	if (!check_horizotal_left(x, y, mlx))
 		return (-18);
-	if (!check_horizotal_right(x, y, cfg))
+	if (!check_horizotal_right(x, y, mlx))
 		return (-19);
-	if (!check_vertical_up(x, y, cfg))
+	if (!check_vertical_up(x, y, mlx))
 		return (-20);
-	if (!check_vertical_down(x, y, cfg))
+	if (!check_vertical_down(x, y, cfg, mlx))
 		return (-21);
 	return (1);
 }
@@ -99,15 +99,15 @@ int		is_valid_map(t_config *cfg, t_mlx *mlx)
 
 	x = 0;
 	error_code = 0;
-	while (cfg->map[x])
+	while (mlx->map[x])
 	{
 		y = 0;
-		while (cfg->map[x][y])
+		while (mlx->map[x][y])
 		{
-			if (cfg->map[x][y] == '0' || cfg->map[x][y] == '2'
-				|| cfg->map[x][y] == mlx->start_dir)
+			if (mlx->map[x][y] == '0' || mlx->map[x][y] == '2'
+				|| mlx->map[x][y] == mlx->start_dir)
 			{
-				if ((error_code = check_wall(x, y, cfg)) < 0)
+				if ((error_code = check_wall(x, y, cfg, mlx)) < 0)
 					return (error_code);
 			}
 			y++;
@@ -128,5 +128,7 @@ int		check_map(t_config *cfg, t_mlx *mlx)
 		return (-17);
 	if ((error_code = is_valid_map(cfg, mlx)) < 0)
 		return (error_code);
+	mlx->width = cfg->width;
+	mlx->height = cfg->height;
 	return (1);
 }

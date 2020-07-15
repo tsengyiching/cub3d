@@ -6,13 +6,13 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 14:20:36 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/15 13:43:42 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/15 16:49:41 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	find_walls(int *hit, t_mlx *mlx, t_config *cfg)
+void	find_walls(int *hit, t_mlx *mlx)
 {
 	while (*hit == 0)
 	{
@@ -28,7 +28,7 @@ void	find_walls(int *hit, t_mlx *mlx, t_config *cfg)
 			mlx->mapy += mlx->stepy;
 			mlx->side = 1;
 		}
-		if (cfg->map[mlx->mapx][mlx->mapy] == '1')
+		if (mlx->map[mlx->mapx][mlx->mapy] == '1')
 			*hit = 1;
 	}
 }
@@ -58,12 +58,12 @@ void	calcul_pixel_to_fill_in_stripe(t_mlx *mlx)
 		mlx->draw_end = mlx->height - 1;
 }
 
-void	draw_walls(int hor, t_config *cfg, t_mlx *mlx)
+void	draw_walls(int hor, t_mlx *mlx)
 {
 	int ver;
 
 	ver = 0;
-	while (ver < cfg->height)
+	while (ver < (int)mlx->height)
 	{
 		if (ver > mlx->draw_start && ver < mlx->draw_end)
 			mlx_pixel_put(mlx->mlx_ptr, mlx->win_ptr, hor, ver, mlx->color);

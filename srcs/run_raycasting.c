@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   do_raycasting.c                                    :+:      :+:    :+:   */
+/*   run_raycasting.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 15:51:32 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/15 14:09:41 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/15 16:50:23 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,12 @@ void	calcul_step_and_init_sidedist(t_mlx *mlx)
 	}
 }
 
-void	run_raycasting(t_mlx *mlx, t_config *cfg)
+void	run_raycasting(t_mlx *mlx)
 {
 	int		x;
 
 	x = 0;
-	mlx->width = cfg->width;
-	mlx->height = cfg->height;
-	while (x < cfg->width)
+	while (x < (int)mlx->width)
 	{
 		mlx->hit = 0;
 		mlx->mapx = (int)mlx->start_posx;
@@ -66,11 +64,11 @@ void	run_raycasting(t_mlx *mlx, t_config *cfg)
 		calcul_ray_pos_and_dir(x, mlx);
 		calcul_ray_length(mlx);
 		calcul_step_and_init_sidedist(mlx);
-		find_walls(&mlx->hit, mlx, cfg);
+		find_walls(&mlx->hit, mlx);
 		calcul_perp_wall_dist(mlx);
 		calcul_pixel_to_fill_in_stripe(mlx);
 		mlx->color = (mlx->side == 1 ? 255 : 65280);
-		draw_walls(x, cfg, mlx);
+		draw_walls(x, mlx);
 		x++;
 	}
 }

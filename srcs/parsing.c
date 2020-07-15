@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 16:15:15 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/13 15:58:42 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/15 16:41:18 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		find_identifier(t_config *cfg, t_mlx *mlx, char *line)
 	return (1);
 }
 
-int		get_map(int ret, int fd, t_config *cfg, char *line)
+int		get_map(int ret, int fd, t_mlx *mlx, char *line)
 {
 	char	**tab;
 
@@ -49,19 +49,19 @@ int		get_map(int ret, int fd, t_config *cfg, char *line)
 	{
 		if (line != NULL)
 		{
-			if (!(cfg->map = malloc(sizeof(char *) * 2)))
+			if (!(mlx->map = malloc(sizeof(char *) * 2)))
 				return (-14);
-			if (!(cfg->map[0] = ft_strdup(line)))
+			if (!(mlx->map[0] = ft_strdup(line)))
 				return (-14);
-			cfg->map[1] = NULL;
+			mlx->map[1] = NULL;
 			free(line);
 			line = NULL;
 		}
 		ret = get_next_line(fd, &line);
 		if (!is_wall(line) && ret != 0)
 			return (-13);
-		tab = cfg->map;
-		if (!(cfg->map = ft_stradd_back(line, tab)))
+		tab = mlx->map;
+		if (!(mlx->map = ft_stradd_back(line, tab)))
 			return (-14);
 		free(line);
 		line = NULL;
@@ -88,7 +88,7 @@ int		parsing(int fd, t_config *cfg, t_mlx *mlx)
 		line = NULL;
 	}
 	if (ret > 0)
-		if ((error_code = get_map(ret, fd, cfg, line)) < 0)
+		if ((error_code = get_map(ret, fd, mlx, line)) < 0)
 			return (error_code);
 	if (ret == 0)
 		return (-15);
