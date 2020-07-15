@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 15:57:17 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/13 16:21:00 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/15 14:37:50 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,17 @@ typedef struct		s_image
 	int				width;
 	int				height;
 }					t_image;
+
+typedef struct		s_key
+{
+	int				forward;
+	int				back;
+	int				left;
+	int				right;
+	int				leftside;
+	int				rightside;
+	int				esc;
+}					t_key;
 
 typedef struct		s_mlx
 {
@@ -67,6 +78,8 @@ typedef struct		s_mlx
 	int				color;
 	double			width;
 	double			height;
+	double			movespeed;
+	double			rotspeed;
 }					t_mlx;
 
 typedef struct		s_config
@@ -94,9 +107,15 @@ int					is_valid_identifier(char *line);
 int					is_wall(char *line);
 int					is_valid_color(int red, int green, int blue);
 int					is_valid_elem(char **map, int x, int y);
+void				init_struct(t_config *cfg, t_mlx *mlx);
 void				init_plane_position(t_mlx *mlx);
 void				init_vector_direction(t_mlx *mlx);
-void				do_raycasting(t_mlx *mlx, t_config *cfg);
+void				find_walls(int *hit, t_mlx *mlx, t_config *cfg);
+void				calcul_perp_wall_dist(t_mlx *mlx);
+void				calcul_pixel_to_fill_in_stripe(t_mlx *mlx);
+void				draw_walls(int hor, t_config *cfg, t_mlx *mlx);
+void				run_raycasting(t_mlx *mlx, t_config *cfg);
+int					run_cub3d(t_config *cfg, t_mlx *mlx);
 char				**ft_stradd_back(char *line, char **tab);
 char				*ft_strdup(const char *s1);
 #endif
