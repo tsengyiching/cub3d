@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 15:06:28 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/15 16:47:13 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/16 19:20:24 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int		check_map_elem(t_config *cfg, t_mlx *mlx)
 			{
 				cfg->player++;
 				mlx->start_dir = mlx->map[x][y];
-				mlx->start_posx = x + 0.5;
-				mlx->start_posy = y + 0.5;
+				mlx->posx = x + 0.5;
+				mlx->posy = y + 0.5;
 			}
 			y++;
 		}

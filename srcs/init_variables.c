@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 13:57:22 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/15 17:05:08 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/16 21:10:53 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,12 @@ void	init_struct(t_config *cfg, t_mlx *mlx)
 {
 	cfg->height = -1;
 	cfg->width = -1;
-	cfg->ceiling = -1;
-	cfg->floor = -1;
+	mlx->ceiling = -1;
+	mlx->floor = -1;
 	cfg->map_rows = 0;
 	mlx->map = NULL;
-	mlx->start_posx = 0;
-	mlx->start_posy = 0;
-	mlx->movespeed = 0.08;
-	mlx->rotspeed = 0.03;
+	mlx->posx = 0;
+	mlx->posy = 0;
 }
 
 void	init_plane_position(t_mlx *mlx)
@@ -54,22 +52,34 @@ void	init_vector_direction(t_mlx *mlx)
 {
 	if (mlx->start_dir == 'N')
 	{
-		mlx->vector_dirx = -1;
-		mlx->vector_diry = 0;
+		mlx->vecdirx = -1;
+		mlx->vecdiry = 0;
 	}
 	if (mlx->start_dir == 'S')
 	{
-		mlx->vector_dirx = 1;
-		mlx->vector_diry = 0;
+		mlx->vecdirx = 1;
+		mlx->vecdiry = 0;
 	}
 	if (mlx->start_dir == 'W')
 	{
-		mlx->vector_dirx = 0;
-		mlx->vector_diry = -1;
+		mlx->vecdirx = 0;
+		mlx->vecdiry = -1;
 	}
 	if (mlx->start_dir == 'E')
 	{
-		mlx->vector_dirx = 0;
-		mlx->vector_diry = 1;
+		mlx->vecdirx = 0;
+		mlx->vecdiry = 1;
 	}
+}
+
+void	init_raycasting(t_mlx *mlx)
+{
+	mlx->mvspeed = 0.08;
+	mlx->rotspeed = 0.03;
+	mlx->bpp = 0;
+	mlx->size_line = 0;
+	mlx->w = mlx->width;
+	mlx->h = mlx->height;
+	init_vector_direction(mlx);
+	init_plane_position(mlx);
 }

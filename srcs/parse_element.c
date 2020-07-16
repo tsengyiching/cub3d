@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 18:42:40 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/13 15:58:37 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/16 21:11:33 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int		get_rgb(char *line, int *index)
 	return (res);
 }
 
-int		parse_rgb(t_config *cfg, char *line)
+int		parse_rgb(t_mlx *mlx, char *line)
 {
 	int	index;
 
@@ -55,15 +55,15 @@ int		parse_rgb(t_config *cfg, char *line)
 	if (line[index] == 'C')
 	{
 		index++;
-		cfg->ceiling = get_rgb(line, &index);
-		if (!cfg->ceiling || cfg->ceiling == -1)
+		mlx->ceiling = get_rgb(line, &index);
+		if (!mlx->ceiling || mlx->ceiling == -1)
 			return (-10);
 	}
 	else if (line[0] == 'F')
 	{
 		index++;
-		cfg->floor = get_rgb(line, &index);
-		if (!cfg->floor || cfg->floor == -1)
+		mlx->floor = get_rgb(line, &index);
+		if (!mlx->floor || mlx->floor == -1)
 			return (-11);
 	}
 	if (line[index] != '\0')
@@ -71,7 +71,7 @@ int		parse_rgb(t_config *cfg, char *line)
 	return (1);
 }
 
-int		parse_texture(t_config *cfg, t_mlx *mlx, char *line)
+int		parse_texture(t_mlx *mlx, char *line)
 {
 	int	error_code;
 
@@ -86,7 +86,7 @@ int		parse_texture(t_config *cfg, t_mlx *mlx, char *line)
 		if (!get_texture_ea(mlx, line + 2))
 			return (-7);
 	if (line[0] == 'C' || line[0] == 'F')
-		if ((error_code = parse_rgb(cfg, line)) < 0)
+		if ((error_code = parse_rgb(mlx, line)) < 0)
 			return (error_code);
 	if (line[0] == 'S')
 		if ((error_code = get_texture_s(mlx, line + 1)) < 0)

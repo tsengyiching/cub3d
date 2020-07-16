@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 16:19:04 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/15 16:58:32 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/16 20:40:29 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,10 +97,10 @@ int		main(int ac, char **av)
 	close(fd);
 	if (error_code < 0)
 		return (write_error(error_code));
-	init_vector_direction(&mlx);
-	init_plane_position(&mlx);
+	init_raycasting(&mlx);
 	mlx.win_ptr = mlx_new_window(mlx.mlx_ptr, cfg.width, cfg.height, "Cube3D");
-	run_cub3d(&mlx);
+	mlx.new_img = mlx_new_image(mlx.mlx_ptr, cfg.width, cfg.height);
+	mlx.pixel = (int *)mlx_get_data_addr(mlx.new_img, &mlx.bpp, &mlx.size_line, &mlx.endian);
 	mlx_loop_hook(mlx.mlx_ptr, run_cub3d, &mlx);
 	mlx_hook(mlx.win_ptr, 2, 0, press_key, &mlx);
 	mlx_hook(mlx.win_ptr, 3, 0, release_key, &mlx);

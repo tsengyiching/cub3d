@@ -6,67 +6,67 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 14:20:36 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/15 16:49:41 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/16 20:31:32 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	find_walls(int *hit, t_mlx *mlx)
-{
-	while (*hit == 0)
-	{
-		if (mlx->side_distx < mlx->side_disty)
-		{
-			mlx->side_distx += mlx->delta_distx;
-			mlx->mapx += mlx->stepx;
-			mlx->side = 0;
-		}
-		else
-		{
-			mlx->side_disty += mlx->delta_disty;
-			mlx->mapy += mlx->stepy;
-			mlx->side = 1;
-		}
-		if (mlx->map[mlx->mapx][mlx->mapy] == '1')
-			*hit = 1;
-	}
-}
+// void	find_walls(t_mlx *mlx)
+// {
+// 	while (mlx->hit == 0)
+// 	{
+// 		if (mlx->side_distx < mlx->side_disty)
+// 		{
+// 			mlx->side_distx += mlx->delta_distx;
+// 			mlx->mapx += mlx->stepx;
+// 			mlx->side = 0;
+// 		}
+// 		else
+// 		{
+// 			mlx->side_disty += mlx->delta_disty;
+// 			mlx->mapy += mlx->stepy;
+// 			mlx->side = 1;
+// 		}
+// 		if (mlx->map[mlx->mapx][mlx->mapy] == '1')
+// 			mlx->hit = 1;
+// 	}
+// }
 
-void	calcul_perp_wall_dist(t_mlx *mlx)
-{
-	if (mlx->side == 0)
-	{
-		mlx->perp_wall_dist = (mlx->mapx - mlx->start_posx +
-								(1 - mlx->stepx) / 2) / mlx->ray_dirx;
-	}
-	else
-	{
-		mlx->perp_wall_dist = (mlx->mapy - mlx->start_posy +
-								(1 - mlx->stepy) / 2) / mlx->ray_diry;
-	}
-}
+// void	calcul_perp_wall_dist(t_mlx *mlx)
+// {
+// 	if (mlx->side == 0)
+// 	{
+// 		mlx->perp_wall_dist = (mlx->mapx - mlx->posx +
+// 								(1 - mlx->stepx) / 2) / mlx->raydirx;
+// 	}
+// 	else
+// 	{
+// 		mlx->perp_wall_dist = (mlx->mapy - mlx->posy +
+// 								(1 - mlx->stepy) / 2) / mlx->raydiry;
+// 	}
+// }
 
-void	calcul_pixel_to_fill_in_stripe(t_mlx *mlx)
-{
-	mlx->line_height = (int)(mlx->height / mlx->perp_wall_dist);
-	mlx->draw_start = -(mlx->line_height) / 2 + mlx->height / 2;
-	if (mlx->draw_start < 0)
-		mlx->draw_start = 0;
-	mlx->draw_end = mlx->line_height / 2 + mlx->height / 2;
-	if (mlx->draw_end >= mlx->height)
-		mlx->draw_end = mlx->height - 1;
-}
+// void	calcul_pixel_to_fill_in_stripe(t_mlx *mlx)
+// {
+// 	mlx->line_height = (int)(mlx->h / mlx->perp_wall_dist);
+// 	mlx->draw_start = -(mlx->line_height) / 2 + mlx->h / 2;
+// 	if (mlx->draw_start < 0)
+// 		mlx->draw_start = 0;
+// 	mlx->draw_end = mlx->line_height / 2 + mlx->h / 2;
+// 	if (mlx->draw_end >= mlx->h)
+// 		mlx->draw_end = mlx->h - 1;
+// }
 
-void	draw_walls(int hor, t_mlx *mlx)
-{
-	int ver;
+// void	draw_walls(int hor, t_mlx *mlx)
+// {
+// 	int ver;
 
-	ver = 0;
-	while (ver < (int)mlx->height)
-	{
-		if (ver > mlx->draw_start && ver < mlx->draw_end)
-			mlx_pixel_put(mlx->mlx_ptr, mlx->win_ptr, hor, ver, mlx->color);
-		ver++;
-	}
-}
+// 	ver = 0;
+// 	while (ver < mlx->height)
+// 	{
+// 		if (ver > mlx->draw_start && ver < mlx->draw_end)
+// 			mlx->pixel[hor + ver * mlx->width] = mlx->color;
+// 		ver++;
+// 	}
+// }

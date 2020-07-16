@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 14:54:49 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/15 17:55:26 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/16 19:35:44 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,72 +54,72 @@ void	move_vertical(t_mlx *mlx)
 {
 	if (mlx->key.forward == 1)
 	{
-		if (mlx->map[(int)(mlx->start_posx + mlx->vector_dirx * mlx->movespeed)]
-			[(int)mlx->start_posy] != '1')
-			mlx->start_posx += mlx->vector_dirx * mlx->movespeed;
-		if (mlx->map[(int)mlx->start_posx]
-			[(int)(mlx->start_posy + mlx->vector_diry * mlx->movespeed)] != '1')
-			mlx->start_posy += mlx->vector_diry * mlx->movespeed;
+		if (mlx->map[(int)(mlx->posx + mlx->vecdirx * mlx->mvspeed)]
+		[(int)mlx->posy] != '1')
+			mlx->posx += mlx->vecdirx * (mlx->mvspeed);
+		if (mlx->map[(int)mlx->posx]
+		[(int)(mlx->posy + mlx->vecdiry * mlx->mvspeed)] != '1')
+			mlx->posy += mlx->vecdiry * (mlx->mvspeed);
 	}
 	if (mlx->key.back == 1)
 	{
-		if (mlx->map[(int)(mlx->start_posx - mlx->vector_dirx * mlx->movespeed)]
-			[(int)mlx->start_posy] != '1')
-			mlx->start_posx -= mlx->vector_dirx * mlx->movespeed;
-		if (mlx->map[(int)mlx->start_posx]
-			[(int)(mlx->start_posy - mlx->vector_diry * mlx->movespeed)] != '1')
-			mlx->start_posy -= mlx->vector_diry * mlx->movespeed;
+		if (mlx->map[(int)(mlx->posx - mlx->vecdirx * mlx->mvspeed)]
+		[(int)mlx->posy] != '1')
+			mlx->posx -= mlx->vecdirx * (mlx->mvspeed);
+		if (mlx->map[(int)mlx->posx]
+		[(int)(mlx->posy - mlx->vecdiry * mlx->mvspeed)] != '1')
+			mlx->posy -= mlx->vecdiry * (mlx->mvspeed);
 	}
 }
 
 void	move_horizontal(t_mlx *mlx)
 {
-	if (mlx->key.left == 1)
-	{
-		if (mlx->map[(int)(mlx->start_posx + mlx->planex * mlx->movespeed)]
-			[(int)mlx->start_posy] != '1')
-			mlx->start_posx += mlx->planex * mlx->movespeed;
-		if (mlx->map[(int)mlx->start_posx]
-			[(int)(mlx->start_posy + mlx->planey * mlx->movespeed)] != '1')
-			mlx->start_posy += mlx->planey * mlx->movespeed;
-	}
 	if (mlx->key.right == 1)
 	{
-		if (mlx->map[(int)(mlx->start_posx - mlx->planex * mlx->movespeed)]
-			[(int)mlx->start_posy] != '1')
-			mlx->start_posx -= mlx->planex * mlx->movespeed;
-		if (mlx->map[(int)mlx->start_posx]
-			[(int)(mlx->start_posy - mlx->planey * mlx->movespeed)] != '1')
-			mlx->start_posy -= mlx->planey * mlx->movespeed;
+		if (mlx->map[(int)(mlx->posx + mlx->planex * mlx->mvspeed)]
+		[(int)mlx->posy] != '1')
+			mlx->posx += mlx->planex * mlx->mvspeed;
+		if (mlx->map[(int)mlx->posx]
+		[(int)(mlx->posy + mlx->planey * mlx->mvspeed)] != '1')
+			mlx->posy += mlx->planey * mlx->mvspeed;
+	}
+	if (mlx->key.left == 1)
+	{
+		if (mlx->map[(int)(mlx->posx - mlx->planex * mlx->mvspeed)]
+		[(int)mlx->posy] != '1')
+			mlx->posx -= mlx->planex * mlx->mvspeed;
+		if (mlx->map[(int)mlx->posx]
+		[(int)(mlx->posy - mlx->planey * mlx->mvspeed)] != '1')
+			mlx->posy -= mlx->planey * mlx->mvspeed;
 	}
 }
 
 void	rotate_view(t_mlx *mlx)
 {
-	if (mlx->key.leftside == 1)
-	{
-		mlx->old_dirx = mlx->vector_dirx;
-		mlx->vector_dirx = mlx->vector_dirx * cos(mlx->rotspeed)
-							- mlx->vector_diry * sin(mlx->rotspeed);
-		mlx->vector_diry = mlx->old_dirx * sin(mlx->rotspeed)
-							+ mlx->vector_diry * cos(mlx->rotspeed);
-		mlx->old_planex = mlx->planex;
-		mlx->planex = mlx->planex * cos(mlx->rotspeed)
-						- mlx->planey * sin(mlx->rotspeed);
-		mlx->planey = mlx->old_planex * sin(mlx->rotspeed)
-						- mlx->planey * cos(mlx->rotspeed);
-	}
 	if (mlx->key.rightside)
 	{
-		mlx->old_dirx = mlx->vector_dirx;
-		mlx->vector_dirx = mlx->vector_dirx * cos(-(mlx->rotspeed))
-							- mlx->vector_diry * sin(-(mlx->rotspeed));
-		mlx->vector_diry = mlx->old_dirx * sin(-(mlx->rotspeed))
-							+ mlx->vector_diry * cos(-(mlx->rotspeed));
+		mlx->old_dirx = mlx->vecdirx;
+		mlx->vecdirx = mlx->vecdirx * cos(-(mlx->rotspeed))
+							- mlx->vecdiry * sin(-(mlx->rotspeed));
+		mlx->vecdiry = mlx->old_dirx * sin(-(mlx->rotspeed))
+							+ mlx->vecdiry * cos(-(mlx->rotspeed));
 		mlx->old_planex = mlx->planex;
 		mlx->planex = mlx->planex * cos(-(mlx->rotspeed))
 						- mlx->planey * sin(-(mlx->rotspeed));
 		mlx->planey = mlx->old_planex * sin(-(mlx->rotspeed))
-						- mlx->planey * cos(-(mlx->rotspeed));
+						+ mlx->planey * cos(-(mlx->rotspeed));
+	}
+	if (mlx->key.leftside == 1)
+	{
+		mlx->old_dirx = mlx->vecdirx;
+		mlx->vecdirx = mlx->vecdirx * cos(mlx->rotspeed)
+							- mlx->vecdiry * sin(mlx->rotspeed);
+		mlx->vecdiry = mlx->old_dirx * sin(mlx->rotspeed)
+							+ mlx->vecdiry * cos(mlx->rotspeed);
+		mlx->old_planex = mlx->planex;
+		mlx->planex = mlx->planex * cos(mlx->rotspeed)
+						- mlx->planey * sin(mlx->rotspeed);
+		mlx->planey = mlx->old_planex * sin(mlx->rotspeed)
+						+ mlx->planey * cos(mlx->rotspeed);
 	}
 }
