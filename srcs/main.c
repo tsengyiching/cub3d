@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 16:19:04 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/16 20:40:29 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/17 13:01:17 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,7 @@ int		main(int ac, char **av)
 {
 	int			fd;
 	int			error_code;
-	t_config	cfg;
-	t_mlx		mlx;
+	t_cub		cub;
 
 	if (ac != 2)
 		return (write_error(-1));
@@ -91,24 +90,24 @@ int		main(int ac, char **av)
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 		return (write_error(-2));
-	init_struct(&cfg, &mlx);
-	mlx.mlx_ptr = mlx_init();
-	error_code = parsing(fd, &cfg, &mlx);
+	init_struct(&cub.cfg);
+	cub.mlx.mlx_ptr = mlx_init();
+	error_code = parsing(fd, &cub.cfg, &cub.mlx);
 	close(fd);
 	if (error_code < 0)
 		return (write_error(error_code));
-	init_raycasting(&mlx);
-	mlx.win_ptr = mlx_new_window(mlx.mlx_ptr, cfg.width, cfg.height, "Cube3D");
-	mlx.new_img = mlx_new_image(mlx.mlx_ptr, cfg.width, cfg.height);
-	mlx.pixel = (int *)mlx_get_data_addr(mlx.new_img, &mlx.bpp, &mlx.size_line, &mlx.endian);
-	mlx_loop_hook(mlx.mlx_ptr, run_cub3d, &mlx);
-	mlx_hook(mlx.win_ptr, 2, 0, press_key, &mlx);
-	mlx_hook(mlx.win_ptr, 3, 0, release_key, &mlx);
+	init_raycasting(&cub.cfg, &cub.mlx);
+	cub.mlx.win_ptr = mlx_new_window(cub.mlx.mlx_ptr, cub.cfg.width, cub.cfg.height, "Cube3D");
+	cub.mlx.new_img = mlx_new_image(cub.mlx.mlx_ptr, cub.cfg.width, cub.cfg.height);
+	cub.mlx.pixel = (int *)mlx_get_data_addr(cub.mlx.new_img, &cub.mlx.bpp, &cub.mlx.size_line, &cub.mlx.endian);
+	mlx_loop_hook(cub.mlx.mlx_ptr, run_cub3d, &cub);
+	mlx_hook(cub.mlx.win_ptr, 2, 0, press_key, &cub.key);
+	mlx_hook(cub.mlx.win_ptr, 3, 0, release_key, &cub.key);
 	// mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img[0].img_ptr, 0, 0);
 	// mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img[1].img_ptr, 100, 0);
 	// mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img[2].img_ptr, 400, 0);
 	// mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img[3].img_ptr, 0, 200);
 	// mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img[4].img_ptr, 300, 300);
-	mlx_loop(mlx.mlx_ptr);
+	mlx_loop(cub.mlx.mlx_ptr);
 	return (0);
 }

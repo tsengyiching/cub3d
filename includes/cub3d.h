@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 15:57:17 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/16 21:12:06 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/17 12:58:27 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define KEY_ARROW_RIGHT	124
 # define KEY_ESC			53
 
-typedef struct		s_image
+typedef struct		s_img
 {
 	void			*img_ptr;
 	int				*img_data;
@@ -34,7 +34,7 @@ typedef struct		s_image
 	int				endian;
 	int				width;
 	int				height;
-}					t_image;
+}					t_img;
 
 typedef struct		s_key
 {
@@ -49,6 +49,7 @@ typedef struct		s_key
 
 typedef struct		s_mlx
 {
+	t_img			img[6];
 	void			*mlx_ptr;
 	void			*win_ptr;
 	void			*new_img;
@@ -56,10 +57,6 @@ typedef struct		s_mlx
 	int				bpp;
 	int				size_line;
 	int				endian;
-	t_image			img[6];
-	t_key			key;
-	char			**map;
-	char			start_dir;
 	double			posx;
 	double			posy;
 	double			vecdirx;
@@ -86,51 +83,60 @@ typedef struct		s_mlx
 	int				draw_start;
 	int				draw_end;
 	int				color;
-	double			w;
-	double			h;
-	int				width;
-	int				height;
+	double			width;
+	double			height;
 	double			mvspeed;
 	double			rotspeed;
-	int				ceiling;
-	int				floor;
 }					t_mlx;
 
-typedef struct		s_config
+typedef struct		s_cfg
 {
 	int				height;
 	int				width;
 	int				player;
+	int				start_posx;
+	int				start_posy;
 	int				map_rows;
-}					t_config;
+	int				ceiling;
+	int				floor;
+	char			start_dir;
+	char			**map;
+}					t_cfg;
 
-int					parsing(int fd, t_config *cfg, t_mlx *mlx);
-int					parse_resolution(t_config *cfg, char *line);
-int					parse_texture(t_mlx *mlx, char *line);
+typedef struct		s_cub
+{
+	t_cfg			cfg;
+	t_mlx			mlx;
+	t_key			key;
+}					t_cub;
+
+int					parsing(int fd, t_cfg *cfg, t_mlx *mlx);
+int					parse_resolution(t_cfg *cfg, char *line);
+int					parse_texture(t_cfg *cfg, t_mlx *mlx, char *line);
 int					get_texture_no(t_mlx *mlx, char *line);
 int					get_texture_we(t_mlx *mlx, char *line);
 int					get_texture_ea(t_mlx *mlx, char *line);
 int					get_texture_s(t_mlx *mlx, char *line);
-int					check_map(t_config *cfg, t_mlx *mlx);
+int					check_map(t_cfg *cfg);
 int					ft_atoi(int i, char *line);
 int					ft_atoi_save_index(int *i, char *line);
 int					is_valid_identifier(char *line);
 int					is_wall(char *line);
 int					is_valid_color(int red, int green, int blue);
 int					is_valid_elem(char **map, int x, int y);
-void				init_struct(t_config *cfg, t_mlx *mlx);
-void				init_raycasting(t_mlx *mlx);
-void				find_walls(t_mlx *mlx);
+void				init_struct(t_cfg *cfg);
+void				init_raycasting(t_cfg *cfg, t_mlx *mlx);
+void				find_walls(t_cfg *cfg, t_mlx *mlx);
 void				calcul_perp_wall_dist(t_mlx *mlx);
 void				calcul_pixel_to_fill_in_stripe(t_mlx *mlx);
-void				draw_walls(int hor, t_mlx *mlx);
-void				run_raycasting(t_mlx *mlx);
-int					run_cub3d(t_mlx *mlx);
-int					press_key(int key, t_mlx *mlx);
-int					release_key(int key, t_mlx *mlx);
-void				move_vertical(t_mlx *mlx);
-void				move_horizontal(t_mlx *mlx);
-void				rotate_view(t_mlx *mlx);
+void				draw_walls(int hor, t_cfg *cfg, t_mlx *mlx);
+void				run_raycasting(t_cub *cub);
+int					run_cub3d(t_cub *cub);
+int					press_key(int keyboard, t_key *key);
+int					release_key(int keyboard, t_key *key);
+void				move_vertical(t_cfg *cfg, t_mlx *mlx, t_key *key);
+void				move_horizontal(t_cfg *cfg, t_mlx *mlx, t_key *key);
+void				rotate_view(t_mlx *mlx, t_key *key);
 char				**ft_stradd_back(char *line, char **tab);
 char				*ft_strdup(const char *s1);
 #endif

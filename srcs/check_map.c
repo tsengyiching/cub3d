@@ -6,32 +6,32 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 15:06:28 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/16 19:20:24 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/17 12:50:43 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int		check_map_elem(t_config *cfg, t_mlx *mlx)
+int		check_map_elem(t_cfg *cfg)
 {
 	int x;
 	int	y;
 
 	x = 0;
-	while (mlx->map[x])
+	while (cfg->map[x])
 	{
 		y = 0;
-		while (mlx->map[x][y])
+		while (cfg->map[x][y])
 		{
-			if (!is_valid_elem(mlx->map, x, y))
+			if (!is_valid_elem(cfg->map, x, y))
 				return (0);
-			if (mlx->map[x][y] == 'N' || mlx->map[x][y] == 'S'
-			|| mlx->map[x][y] == 'W' || mlx->map[x][y] == 'E')
+			if (cfg->map[x][y] == 'N' || cfg->map[x][y] == 'S'
+			|| cfg->map[x][y] == 'W' || cfg->map[x][y] == 'E')
 			{
 				cfg->player++;
-				mlx->start_dir = mlx->map[x][y];
-				mlx->posx = x + 0.5;
-				mlx->posy = y + 0.5;
+				cfg->start_dir = cfg->map[x][y];
+				cfg->start_posx = x;
+				cfg->start_posy = y;
 			}
 			y++;
 		}
@@ -41,57 +41,57 @@ int		check_map_elem(t_config *cfg, t_mlx *mlx)
 	return (1);
 }
 
-int		check_horizotal_left(int x, int y, t_mlx *mlx)
+int		check_horizotal_left(int x, int y, t_cfg *cfg)
 {
-	while (y > 0 && mlx->map[x][y] != '1' && mlx->map[x][y] != ' ')
+	while (y > 0 && cfg->map[x][y] != '1' && cfg->map[x][y] != ' ')
 		y--;
-	if (mlx->map[x][y] != '1')
+	if (cfg->map[x][y] != '1')
 		return (0);
 	return (1);
 }
 
-int		check_horizotal_right(int x, int y, t_mlx *mlx)
+int		check_horizotal_right(int x, int y, t_cfg *cfg)
 {
-	while (y > 0 && mlx->map[x][y] != '1' && mlx->map[x][y] != ' ')
+	while (y > 0 && cfg->map[x][y] != '1' && cfg->map[x][y] != ' ')
 		y++;
-	if (mlx->map[x][y] != '1')
+	if (cfg->map[x][y] != '1')
 		return (0);
 	return (1);
 }
 
-int		check_vertical_up(int x, int y, t_mlx *mlx)
+int		check_vertical_up(int x, int y, t_cfg *cfg)
 {
-	while (x > 0 && mlx->map[x][y] != '1' && mlx->map[x][y] != ' ')
+	while (x > 0 && cfg->map[x][y] != '1' && cfg->map[x][y] != ' ')
 		x--;
-	if (mlx->map[x][y] != '1')
+	if (cfg->map[x][y] != '1')
 		return (0);
 	return (1);
 }
 
-int		check_vertical_down(int x, int y, t_config *cfg, t_mlx *mlx)
+int		check_vertical_down(int x, int y, t_cfg *cfg)
 {
-	while (x < cfg->map_rows && mlx->map[x][y] != '1' && mlx->map[x][y] != ' '
-		&& mlx->map[x][y] != '\0')
+	while (x < cfg->map_rows && cfg->map[x][y] != '1' && cfg->map[x][y] != ' '
+		&& cfg->map[x][y] != '\0')
 		x++;
-	if (mlx->map[x][y] != '1')
+	if (cfg->map[x][y] != '1')
 		return (0);
 	return (1);
 }
 
-int		check_wall(int x, int y, t_config *cfg, t_mlx *mlx)
+int		check_wall(int x, int y, t_cfg *cfg)
 {
-	if (!check_horizotal_left(x, y, mlx))
+	if (!check_horizotal_left(x, y, cfg))
 		return (-18);
-	if (!check_horizotal_right(x, y, mlx))
+	if (!check_horizotal_right(x, y, cfg))
 		return (-19);
-	if (!check_vertical_up(x, y, mlx))
+	if (!check_vertical_up(x, y, cfg))
 		return (-20);
-	if (!check_vertical_down(x, y, cfg, mlx))
+	if (!check_vertical_down(x, y, cfg))
 		return (-21);
 	return (1);
 }
 
-int		is_valid_map(t_config *cfg, t_mlx *mlx)
+int		is_valid_map(t_cfg *cfg)
 {
 	int		x;
 	int		y;
@@ -99,15 +99,15 @@ int		is_valid_map(t_config *cfg, t_mlx *mlx)
 
 	x = 0;
 	error_code = 0;
-	while (mlx->map[x])
+	while (cfg->map[x])
 	{
 		y = 0;
-		while (mlx->map[x][y])
+		while (cfg->map[x][y])
 		{
-			if (mlx->map[x][y] == '0' || mlx->map[x][y] == '2'
-				|| mlx->map[x][y] == mlx->start_dir)
+			if (cfg->map[x][y] == '0' || cfg->map[x][y] == '2'
+				|| cfg->map[x][y] == cfg->start_dir)
 			{
-				if ((error_code = check_wall(x, y, cfg, mlx)) < 0)
+				if ((error_code = check_wall(x, y, cfg)) < 0)
 					return (error_code);
 			}
 			y++;
@@ -117,18 +117,16 @@ int		is_valid_map(t_config *cfg, t_mlx *mlx)
 	return (1);
 }
 
-int		check_map(t_config *cfg, t_mlx *mlx)
+int		check_map(t_cfg *cfg)
 {
 	int		error_code;
 
 	error_code = 0;
-	if (!check_map_elem(cfg, mlx))
+	if (!check_map_elem(cfg))
 		return (-16);
 	if (cfg->player != 1)
 		return (-17);
-	if ((error_code = is_valid_map(cfg, mlx)) < 0)
+	if ((error_code = is_valid_map(cfg)) < 0)
 		return (error_code);
-	mlx->width = cfg->width;
-	mlx->height = cfg->height;
 	return (1);
 }
