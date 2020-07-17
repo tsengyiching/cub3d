@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 15:51:32 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/17 15:12:43 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/17 23:09:42 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ void	calcul_step_and_init_sidedist(t_mlx *mlx)
 	else
 	{
 		mlx->stepx = 1;
-		mlx->side_distx = (mlx->mapx + 1.0 - mlx->posx)
-							* mlx->delta_distx;
+		mlx->side_distx = (mlx->mapx + 1.0 - mlx->posx) * mlx->delta_distx;
 	}
 	if (mlx->raydiry < 0)
 	{
@@ -46,8 +45,7 @@ void	calcul_step_and_init_sidedist(t_mlx *mlx)
 	else
 	{
 		mlx->stepy = 1;
-		mlx->side_disty = (mlx->mapy + 1.0 - mlx->posy)
-							* mlx->delta_disty;
+		mlx->side_disty = (mlx->mapy + 1.0 - mlx->posy) * mlx->delta_disty;
 	}
 }
 
@@ -67,7 +65,10 @@ void	run_raycasting(t_cub *cub)
 		find_walls(&cub->cfg, &cub->mlx);
 		calcul_perp_wall_dist(&cub->mlx);
 		calcul_pixel_to_fill_in_stripe(&cub->mlx);
-		cub->mlx.color = (cub->mlx.side == 1 ? 16762980 : 6604900);
+		if (cub->mlx.side == 0)
+			cub->mlx.color = (cub->mlx.raydirx < 0 ? 16762980 : 6604900);
+		else
+			cub->mlx.color = (cub->mlx.raydiry < 0 ? 255 : 16711680);
 		draw_walls(x, &cub->cfg, &cub->mlx);
 		x++;
 	}
