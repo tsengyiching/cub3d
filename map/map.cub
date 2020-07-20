@@ -1,14 +1,14 @@
-R 600 400
+R 800 600
 
-NO ./textures/brick.xpm
-SO ./textures/stone.xpm
-WE ./textures/iron.xpm
-EA ./textures/wood.xpm
+NO ./textures/kiss.xpm
+SO ./textures/thescream.xpm
+WE ./textures/thegirl.xpm
+EA ./textures/medieval.xpm
 
 S ./textures/ghost.xpm
 
-F 50,50,50
-C 100,200,255
+F 102,0,0
+C 255,229,204
 
         1111111111111111111111111
         1000000000110000000000001

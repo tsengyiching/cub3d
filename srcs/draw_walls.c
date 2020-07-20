@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 14:20:36 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/17 13:45:18 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/20 19:57:59 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,24 @@ void	calcul_pixel_to_fill_in_stripe(t_mlx *mlx)
 		mlx->draw_end = mlx->height - 1;
 }
 
+void	calcul_wall_texture(t_mlx *mlx)
+{
+	if (mlx->side == 0)
+		mlx->texture = (mlx->raydirx < 0 ? NO : SO);
+	else
+		mlx->texture = (mlx->raydiry < 0 ? WE : EA);
+	if (mlx->side == 0)
+		mlx->wall_pos = mlx->posy + mlx->perp_wall_dist * mlx->raydiry;
+	else
+		mlx->wall_pos = mlx->posx + mlx->perp_wall_dist * mlx->raydirx;
+	mlx->wall_pos -= floor(mlx->wall_pos);
+	mlx->textx = (int)(mlx->wall_pos * (double)(mlx->img[mlx->texture].width));
+	if (mlx->side == 0 && mlx->raydirx > 0)
+		mlx->textx = mlx->img[mlx->texture].width - mlx->textx - 1;
+	if (mlx->side == 1 && mlx->raydiry > 0)
+		mlx->textx = mlx->img[mlx->texture].width - mlx->textx - 1;
+}
+
 void	draw_walls(int hor, t_cfg *cfg, t_mlx *mlx)
 {
 	int ver;
@@ -68,7 +86,12 @@ void	draw_walls(int hor, t_cfg *cfg, t_mlx *mlx)
 		if (ver < mlx->draw_start)
 			mlx->pixel[hor + ver * cfg->width] = cfg->ceiling;
 		if (ver >= mlx->draw_start && ver <= mlx->draw_end)
+		{
+			mlx->texty = ((ver - mlx->height / 2 + mlx->line_height / 2) *
+				mlx->img[mlx->texture].height - 1) / mlx->line_height;
+			mlx->color = mlx->img[mlx->texture].img_data[mlx->img[mlx->texture].width * mlx->texty + mlx->textx];
 			mlx->pixel[hor + ver * cfg->width] = mlx->color;
+		}
 		if (ver > mlx->draw_end)
 			mlx->pixel[hor + ver * cfg->width] = cfg->floor;
 		ver++;

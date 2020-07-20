@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 15:51:32 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/17 23:09:42 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/20 15:58:30 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,7 @@ void	run_raycasting(t_cub *cub)
 		find_walls(&cub->cfg, &cub->mlx);
 		calcul_perp_wall_dist(&cub->mlx);
 		calcul_pixel_to_fill_in_stripe(&cub->mlx);
-		if (cub->mlx.side == 0)
-			cub->mlx.color = (cub->mlx.raydirx < 0 ? 16762980 : 6604900);
-		else
-			cub->mlx.color = (cub->mlx.raydiry < 0 ? 255 : 16711680);
+		calcul_wall_texture(&cub->mlx);
 		draw_walls(x, &cub->cfg, &cub->mlx);
 		x++;
 	}

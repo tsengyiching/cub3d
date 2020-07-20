@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 15:57:17 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/17 12:58:27 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/20 15:58:23 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@
 # define KEY_ARROW_LEFT		123
 # define KEY_ARROW_RIGHT	124
 # define KEY_ESC			53
+# define NO					0
+# define SO					1
+# define WE					2
+# define EA					3
+# define SP					4
 
 typedef struct		s_img
 {
@@ -87,6 +92,12 @@ typedef struct		s_mlx
 	double			height;
 	double			mvspeed;
 	double			rotspeed;
+	int				texture;
+	double			wall_pos;
+	double			step;
+	double			text_pos;
+	int				textx;
+	int				texty;
 }					t_mlx;
 
 typedef struct		s_cfg
@@ -129,6 +140,7 @@ void				init_raycasting(t_cfg *cfg, t_mlx *mlx);
 void				find_walls(t_cfg *cfg, t_mlx *mlx);
 void				calcul_perp_wall_dist(t_mlx *mlx);
 void				calcul_pixel_to_fill_in_stripe(t_mlx *mlx);
+void				calcul_wall_texture(t_mlx *mlx);
 void				draw_walls(int hor, t_cfg *cfg, t_mlx *mlx);
 void				run_raycasting(t_cub *cub);
 int					run_cub3d(t_cub *cub);

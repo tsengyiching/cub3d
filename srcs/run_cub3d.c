@@ -6,46 +6,46 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 14:07:59 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/17 15:04:54 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/18 18:23:13 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int		press_key(int keyboard, t_key *key)
+int		press_key(int keycode, t_key *key)
 {
-	if (keyboard == KEY_W)
+	if (keycode == KEY_W)
 		key->forward = 1;
-	if (keyboard == KEY_S)
+	if (keycode == KEY_S)
 		key->back = 1;
-	if (keyboard == KEY_A)
+	if (keycode == KEY_A)
 		key->left = 1;
-	if (keyboard == KEY_D)
+	if (keycode == KEY_D)
 		key->right = 1;
-	if (keyboard == KEY_ARROW_LEFT)
+	if (keycode == KEY_ARROW_LEFT)
 		key->leftside = 1;
-	if (keyboard == KEY_ARROW_RIGHT)
+	if (keycode == KEY_ARROW_RIGHT)
 		key->rightside = 1;
-	if (keyboard == KEY_ESC)
+	if (keycode == KEY_ESC)
 		key->esc = 1;
 	return (0);
 }
 
-int		release_key(int keyboard, t_key *key)
+int		release_key(int keycode, t_key *key)
 {
-	if (keyboard == KEY_W)
+	if (keycode == KEY_W)
 		key->forward = 0;
-	if (keyboard == KEY_S)
+	if (keycode == KEY_S)
 		key->back = 0;
-	if (keyboard == KEY_A)
+	if (keycode == KEY_A)
 		key->left = 0;
-	if (keyboard == KEY_D)
+	if (keycode == KEY_D)
 		key->right = 0;
-	if (keyboard == KEY_ARROW_LEFT)
+	if (keycode == KEY_ARROW_LEFT)
 		key->leftside = 0;
-	if (keyboard == KEY_ARROW_RIGHT)
+	if (keycode == KEY_ARROW_RIGHT)
 		key->rightside = 0;
-	if (keyboard == KEY_ESC)
+	if (keycode == KEY_ESC)
 		key->esc = 0;
 	return (0);
 }
