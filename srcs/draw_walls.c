@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 14:20:36 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/20 19:57:59 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/21 16:20:33 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,8 @@ void	draw_walls(int hor, t_cfg *cfg, t_mlx *mlx)
 		{
 			mlx->texty = ((ver - mlx->height / 2 + mlx->line_height / 2) *
 				mlx->img[mlx->texture].height - 1) / mlx->line_height;
-			mlx->color = mlx->img[mlx->texture].img_data[mlx->img[mlx->texture].width * mlx->texty + mlx->textx];
+			mlx->color = mlx->img[mlx->texture].img_data[mlx->img
+			[mlx->texture].width * mlx->texty + mlx->textx];
 			mlx->pixel[hor + ver * cfg->width] = mlx->color;
 		}
 		if (ver > mlx->draw_end)

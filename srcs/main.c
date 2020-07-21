@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 16:19:04 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/17 13:01:17 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/20 22:17:56 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,11 +103,6 @@ int		main(int ac, char **av)
 	mlx_loop_hook(cub.mlx.mlx_ptr, run_cub3d, &cub);
 	mlx_hook(cub.mlx.win_ptr, 2, 0, press_key, &cub.key);
 	mlx_hook(cub.mlx.win_ptr, 3, 0, release_key, &cub.key);
-	// mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img[0].img_ptr, 0, 0);
-	// mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img[1].img_ptr, 100, 0);
-	// mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img[2].img_ptr, 400, 0);
-	// mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img[3].img_ptr, 0, 200);
-	// mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img[4].img_ptr, 300, 300);
 	mlx_loop(cub.mlx.mlx_ptr);
 	return (0);
 }

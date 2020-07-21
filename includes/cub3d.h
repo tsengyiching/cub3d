@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 15:57:17 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/20 15:58:23 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/21 23:14:29 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,13 @@ typedef struct		s_img
 	int				height;
 }					t_img;
 
+typedef struct		s_sprite
+{
+	double			x;
+	double			y;
+	double			dist;
+}					t_sprite;
+
 typedef struct		s_key
 {
 	int				forward;
@@ -54,7 +61,8 @@ typedef struct		s_key
 
 typedef struct		s_mlx
 {
-	t_img			img[6];
+	t_img			img[5];
+	t_sprite		*spr;
 	void			*mlx_ptr;
 	void			*win_ptr;
 	void			*new_img;
@@ -98,6 +106,19 @@ typedef struct		s_mlx
 	double			text_pos;
 	int				textx;
 	int				texty;
+	double			*buf;
+	double			spritex;
+	double			spritey;
+	double			inv_det;
+	double			transformx;
+	double			transformy;
+	int				spr_screenx;
+	int				spr_height;
+	int				spr_width;
+	int				draw_startx;
+	int				draw_starty;
+	int				draw_endx;
+	int				draw_endy;
 }					t_mlx;
 
 typedef struct		s_cfg
@@ -110,6 +131,7 @@ typedef struct		s_cfg
 	int				map_rows;
 	int				ceiling;
 	int				floor;
+	int				sprite_nb;
 	char			start_dir;
 	char			**map;
 }					t_cfg;
@@ -129,6 +151,7 @@ int					get_texture_we(t_mlx *mlx, char *line);
 int					get_texture_ea(t_mlx *mlx, char *line);
 int					get_texture_s(t_mlx *mlx, char *line);
 int					check_map(t_cfg *cfg);
+int					check_wall(int x, int y, t_cfg *cfg);
 int					ft_atoi(int i, char *line);
 int					ft_atoi_save_index(int *i, char *line);
 int					is_valid_identifier(char *line);
@@ -149,6 +172,7 @@ int					release_key(int keyboard, t_key *key);
 void				move_vertical(t_cfg *cfg, t_mlx *mlx, t_key *key);
 void				move_horizontal(t_cfg *cfg, t_mlx *mlx, t_key *key);
 void				rotate_view(t_mlx *mlx, t_key *key);
+void				find_sprite(t_cfg *cfg, t_mlx *mlx);
 char				**ft_stradd_back(char *line, char **tab);
 char				*ft_strdup(const char *s1);
 #endif

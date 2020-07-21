@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 13:57:22 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/17 13:38:43 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/21 16:39:37 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	init_struct(t_cfg *cfg)
 	cfg->ceiling = -1;
 	cfg->floor = -1;
 	cfg->map_rows = 0;
+	cfg->sprite_nb = 0;
 	cfg->map = NULL;
 	cfg->player = 0;
 	cfg->start_posx = 0;
