@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 15:06:28 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/21 16:35:43 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/22 23:04:09 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int		is_valid_map(t_cfg *cfg)
 	return (1);
 }
 
-void	count_sprite(t_cfg *cfg)
+int		count_sprite(t_cfg *cfg, t_mlx *mlx)
 {
 	int x;
 	int	y;
@@ -84,9 +84,12 @@ void	count_sprite(t_cfg *cfg)
 		}
 		x++;
 	}
+	if (!(mlx->spr = malloc(sizeof(t_sprite) * cfg->sprite_nb)))
+		return (-14);
+	return (1);
 }
 
-int		check_map(t_cfg *cfg)
+int		check_map(t_cfg *cfg, t_mlx *mlx)
 {
 	int		error_code;
 
@@ -97,6 +100,9 @@ int		check_map(t_cfg *cfg)
 		return (-17);
 	if ((error_code = is_valid_map(cfg)) < 0)
 		return (error_code);
-	count_sprite(cfg);
+	if ((error_code = count_sprite(cfg, mlx)) < 0)
+		return (error_code);
+	if (!(mlx->buf = malloc(sizeof(double) * (cfg->width - 1))))
+		return (-14);
 	return (1);
 }

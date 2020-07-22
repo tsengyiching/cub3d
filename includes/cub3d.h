@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 15:57:17 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/21 23:14:29 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/22 22:59:16 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ int					get_texture_no(t_mlx *mlx, char *line);
 int					get_texture_we(t_mlx *mlx, char *line);
 int					get_texture_ea(t_mlx *mlx, char *line);
 int					get_texture_s(t_mlx *mlx, char *line);
-int					check_map(t_cfg *cfg);
+int					check_map(t_cfg *cfg, t_mlx *mlx);
 int					check_wall(int x, int y, t_cfg *cfg);
 int					ft_atoi(int i, char *line);
 int					ft_atoi_save_index(int *i, char *line);
@@ -173,6 +173,9 @@ void				move_vertical(t_cfg *cfg, t_mlx *mlx, t_key *key);
 void				move_horizontal(t_cfg *cfg, t_mlx *mlx, t_key *key);
 void				rotate_view(t_mlx *mlx, t_key *key);
 void				find_sprite(t_cfg *cfg, t_mlx *mlx);
+void				init_sprite_dist(t_cfg *cfg, t_mlx *mlx);
+void				calcul_sprite(t_mlx *mlx, int i);
+void				draw_sprite(t_mlx *mlx, t_cfg *cfg);
 char				**ft_stradd_back(char *line, char **tab);
 char				*ft_strdup(const char *s1);
 #endif

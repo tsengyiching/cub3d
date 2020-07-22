@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 15:51:32 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/21 22:24:41 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/22 22:42:46 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,12 @@ void	run_raycasting(t_cub *cub)
 	{
 		x = 0;
 		find_sprite(&cub->cfg, &cub->mlx);
+		init_sprite_dist(&cub->cfg, &cub->mlx);
 		while (x < cub->cfg.sprite_nb)
 		{
-			calcul_sprite_dist(&cub->mlx, x);
+			calcul_sprite(&cub->mlx, x);
+			draw_sprite(&cub->mlx, &cub->cfg);
+			x++;
 		}
 	}
 }
