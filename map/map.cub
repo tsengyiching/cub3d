@@ -5,7 +5,7 @@ SO ./textures/thescream.xpm
 WE ./textures/thegirl.xpm
 EA ./textures/medieval.xpm
 
-S ./textures/ghost.xpm
+S ./textures/baby.xpm
 
 F 102,0,0
 C 255,229,204
