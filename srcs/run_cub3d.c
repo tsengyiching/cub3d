@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 14:07:59 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/29 19:35:03 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/29 19:49:38 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,19 +50,25 @@ int		release_key(int keycode, t_key *key)
 	return (0);
 }
 
-int		close_window(t_cub *cub)
+void	free_tab(char **tab)
 {
 	int	i;
 
 	i = 0;
-	mlx_clear_window(cub->mlx.mlx_ptr, cub->mlx.win_ptr);
-	mlx_destroy_window(cub->mlx.mlx_ptr, cub->mlx.win_ptr);
-	while (cub->cfg.map[i])
+	while (tab[i])
 	{
-		free(cub->cfg.map[i]);
+		free(tab[i]);
 		i++;
 	}
-	free(cub->cfg.map[i]);
+	free(tab);
+	tab = NULL;
+}
+
+int		close_window(t_cub *cub)
+{
+	mlx_clear_window(cub->mlx.mlx_ptr, cub->mlx.win_ptr);
+	mlx_destroy_window(cub->mlx.mlx_ptr, cub->mlx.win_ptr);
+	free(cub->cfg.map);
 	free(cub->mlx.buf);
 	//free cub->mlx.sprite
 	exit(0);

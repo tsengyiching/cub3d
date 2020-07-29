@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 16:19:04 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/29 19:34:55 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/29 19:51:14 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,11 @@ int		main(int ac, char **av)
 	error_code = parsing(fd, &cub.cfg, &cub.mlx);
 	close(fd);
 	if (error_code < 0)
+	{
+		if (!cub.cfg.map)
+			free_tab(cub.cfg.map);
 		return (write_error(error_code));
-	//free malloc while error occurs
+	}
 	init_raycasting(&cub.cfg, &cub.mlx);
 	cub.mlx.win_ptr = mlx_new_window(cub.mlx.mlx_ptr, cub.cfg.width, cub.cfg.height, "Cube3D");
 	cub.mlx.new_img = mlx_new_image(cub.mlx.mlx_ptr, cub.cfg.width, cub.cfg.height);
