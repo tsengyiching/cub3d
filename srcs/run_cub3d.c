@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 14:07:59 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/29 11:32:24 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/29 11:37:12 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int		close_cub3d(t_cub *cub)
 	}
 	free(cub->cfg.map[i]);
 	free(cub->mlx.buf);
+	//free cub->mlx.sprite
 	exit(0);
 }
 
