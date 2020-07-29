@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 15:57:17 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/22 22:59:16 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/29 11:18:30 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,6 +176,8 @@ void				find_sprite(t_cfg *cfg, t_mlx *mlx);
 void				init_sprite_dist(t_cfg *cfg, t_mlx *mlx);
 void				calcul_sprite(t_mlx *mlx, int i);
 void				draw_sprite(t_mlx *mlx, t_cfg *cfg);
+int					write_error(int error_code);
+int					close_cub3d(t_cub *cub);
 char				**ft_stradd_back(char *line, char **tab);
 char				*ft_strdup(const char *s1);
 #endif

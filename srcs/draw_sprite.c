@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/21 17:03:00 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/22 22:54:18 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/27 15:12:03 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	sort_sprite_dist(t_cfg *cfg, t_mlx *mlx)
 	int			i;
 	int			j;
 	t_sprite	tmp;
-	
+
 	i = 0;
 	while (i < cfg->sprite_nb - 1)
 	{
@@ -38,13 +38,13 @@ void	sort_sprite_dist(t_cfg *cfg, t_mlx *mlx)
 
 void	init_sprite_dist(t_cfg *cfg, t_mlx *mlx)
 {
-	int			i;
+	int	i;
 
 	i = 0;
 	while (i < cfg->sprite_nb)
 	{
 		mlx->spr[i].dist = ((mlx->posx - mlx->spr[i].x) *
-							(mlx->posx - mlx->spr[i].x) + 
+							(mlx->posx - mlx->spr[i].x) +
 							(mlx->posy - mlx->spr[i].y) *
 							(mlx->posy - mlx->spr[i].y));
 		i++;
@@ -53,7 +53,7 @@ void	init_sprite_dist(t_cfg *cfg, t_mlx *mlx)
 }
 
 void	find_sprite(t_cfg *cfg, t_mlx *mlx)
-{	
+{
 	int x;
 	int	y;
 	int	i;
@@ -81,10 +81,14 @@ void	calcul_sprite(t_mlx *mlx, int i)
 {
 	mlx->spritex = mlx->spr[i].x - mlx->posx;
 	mlx->spritey = mlx->spr[i].y - mlx->posy;
-	mlx->inv_det = 1.0 / (mlx->planex * mlx->vecdiry - mlx->vecdirx * mlx->planey);
-	mlx->transformx = mlx->inv_det * (mlx->vecdiry * mlx->spritex - mlx->vecdirx * mlx->spritey);
-	mlx->transformy = mlx->inv_det * (-mlx->planey * mlx->spritex + mlx->planex * mlx->spritey);
-	mlx->spr_screenx = (int)((mlx->width / 2) * (1 + mlx->transformx / mlx->transformy));
+	mlx->inv_det = 1.0 / (mlx->planex * mlx->vecdiry - mlx->vecdirx *
+					mlx->planey);
+	mlx->transformx = mlx->inv_det * (mlx->vecdiry * mlx->spritex -
+						mlx->vecdirx * mlx->spritey);
+	mlx->transformy = mlx->inv_det * (-mlx->planey * mlx->spritex + mlx->planex
+						* mlx->spritey);
+	mlx->spr_screenx = (int)((mlx->width / 2) * (1 + mlx->transformx
+						/ mlx->transformy));
 	mlx->spr_height = abs((int)(mlx->height / mlx->transformy));
 	mlx->draw_starty = -mlx->spr_height / 2 + mlx->height / 2;
 	if (mlx->draw_starty < 0)
@@ -105,7 +109,7 @@ void	draw_sprite(t_mlx *mlx, t_cfg *cfg)
 {
 	int	hor;
 	int	ver;
-	
+
 	hor = mlx->draw_startx;
 	while (hor < mlx->draw_endx)
 	{
@@ -123,7 +127,7 @@ void	draw_sprite(t_mlx *mlx, t_cfg *cfg)
 					mlx->texty + mlx->textx];
 				if ((mlx->color & 0xffffff) != 0)
 					mlx->pixel[hor + ver * cfg->width] = mlx->color;
-				ver++; 
+				ver++;
 			}
 		}
 		hor++;

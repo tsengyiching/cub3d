@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 14:07:59 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/18 18:23:13 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/29 11:32:24 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,23 @@ int		release_key(int keycode, t_key *key)
 	return (0);
 }
 
+int		close_cub3d(t_cub *cub)
+{
+	int	i;
+
+	i = 0;
+	mlx_clear_window(cub->mlx.mlx_ptr, cub->mlx.win_ptr);
+	mlx_destroy_window(cub->mlx.mlx_ptr, cub->mlx.win_ptr);
+	while (cub->cfg.map[i])
+	{
+		free(cub->cfg.map[i]);
+		i++;
+	}
+	free(cub->cfg.map[i]);
+	free(cub->mlx.buf);
+	exit(0);
+}
+
 int		run_cub3d(t_cub *cub)
 {
 	if (cub->key.forward == 1 || cub->key.back == 1)
@@ -59,11 +76,7 @@ int		run_cub3d(t_cub *cub)
 	if (cub->key.leftside == 1 || cub->key.rightside == 1)
 		rotate_view(&cub->mlx, &cub->key);
 	if (cub->key.esc == 1)
-	{
-		mlx_clear_window(cub->mlx.mlx_ptr, cub->mlx.win_ptr);
-		mlx_destroy_window(cub->mlx.mlx_ptr, cub->mlx.win_ptr);
-		exit(0);
-	}
+		close_cub3d(cub);
 	run_raycasting(cub);
 	mlx_put_image_to_window(cub->mlx.mlx_ptr, cub->mlx.win_ptr,
 							cub->mlx.new_img, 0, 0);
