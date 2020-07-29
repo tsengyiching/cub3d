@@ -6,27 +6,11 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 16:19:04 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/29 11:19:15 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/29 19:34:55 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-int		is_valide_file(char *str)
-{
-	int		len;
-	
-	len = ft_strlen(str);
-	if (str[len - 1] != 'b')
-		return (0);
-	if (str[len - 2] != 'u')
-		return (0);
-	if (str[len - 3] != 'c')
-		return (0);
-	if (str[len - 4] != '.')
-		return (0);
-	return (1);
-}
 
 int		is_save(char *str)
 {
@@ -48,11 +32,15 @@ int		is_save(char *str)
 
 int		check_av(int ac, char **av)
 {
+	int len;
+	
 	if (ac < 2 || ac > 3)
 		return (-1);
 	if (ac == 2)
 	{
-		if (!is_valide_file(av[1]))
+		len = ft_strlen(av[1]);
+		if (av[1][len - 1] != 'b' ||av[1][len - 2] != 'u' ||
+			av[1][len - 3] != 'c' || av[1][len - 4] != '.')
 			return (-22);
 	}
 	if (ac == 3)
@@ -80,6 +68,7 @@ int		main(int ac, char **av)
 	close(fd);
 	if (error_code < 0)
 		return (write_error(error_code));
+	//free malloc while error occurs
 	init_raycasting(&cub.cfg, &cub.mlx);
 	cub.mlx.win_ptr = mlx_new_window(cub.mlx.mlx_ptr, cub.cfg.width, cub.cfg.height, "Cube3D");
 	cub.mlx.new_img = mlx_new_image(cub.mlx.mlx_ptr, cub.cfg.width, cub.cfg.height);
@@ -89,7 +78,7 @@ int		main(int ac, char **av)
 	mlx_loop_hook(cub.mlx.mlx_ptr, run_cub3d, &cub);
 	mlx_hook(cub.mlx.win_ptr, 2, 0, press_key, &cub.key);
 	mlx_hook(cub.mlx.win_ptr, 3, 0, release_key, &cub.key);
-	mlx_hook(cub.mlx.win_ptr, 17, 0, close_cub3d, &cub);
+	mlx_hook(cub.mlx.win_ptr, 17, 0, close_window, &cub);
 	mlx_loop(cub.mlx.mlx_ptr);
 	return (0);
 }
