@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 15:13:11 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/27 15:36:46 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/30 14:36:24 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int		write_error(int error_code)
 	else if (error_code == -21)
 		write(1, "Error: Map is not closed with walls (down)\n", 43);
 	else if (error_code == -22)
-		write(1, "Error: Invalid file extension\n", 30);
+		write(1, "Error: Invalid map file extension\n", 34);
 	else if (error_code == -23)
 		write(1, "Error: the last argument is not --save\n", 38);
 	return (0);

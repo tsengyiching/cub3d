@@ -6,13 +6,13 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 13:57:22 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/22 20:49:23 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/30 14:39:24 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	init_struct(t_cfg *cfg)
+void	init_config(t_cfg *cfg)
 {
 	cfg->height = -1;
 	cfg->width = -1;

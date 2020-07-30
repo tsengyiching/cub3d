@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 15:57:17 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/29 19:49:32 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/30 23:34:44 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,37 @@
 # define WE					2
 # define EA					3
 # define SP					4
+
+typedef struct		s_bmfh
+{
+	unsigned char	bitmap_type[2];
+	int				file_size;
+	short			reserved1;
+	short			reserved2;
+	unsigned int 	offset_bits;
+}					t_bmfh;
+
+typedef struct		s_bmih
+{
+	unsigned int	size_header;
+	unsigned int	width;
+	unsigned int	height;
+	short int		planes;
+	short int		bit_count;
+	unsigned int	compression;
+	unsigned int	image_size;
+	unsigned int	ppm_x;
+	unsigned int	ppm_y;
+	unsigned int	clr_used;
+	unsigned int	clr_important;
+}					t_bmih;
+
+typedef struct		s_rgb
+{
+	unsigned char	red;
+	unsigned char	green;
+	unsigned char	blue;
+}					t_rgb;
 
 typedef struct		s_img
 {
@@ -141,6 +172,8 @@ typedef struct		s_cub
 	t_cfg			cfg;
 	t_mlx			mlx;
 	t_key			key;
+	t_bmfh			bmfh;
+	t_bmih			bmih;
 }					t_cub;
 
 int					parsing(int fd, t_cfg *cfg, t_mlx *mlx);
@@ -158,7 +191,7 @@ int					is_valid_identifier(char *line);
 int					is_wall(char *line);
 int					is_valid_color(int red, int green, int blue);
 int					is_valid_elem(char **map, int x, int y);
-void				init_struct(t_cfg *cfg);
+void				init_config(t_cfg *cfg);
 void				init_raycasting(t_cfg *cfg, t_mlx *mlx);
 void				find_walls(t_cfg *cfg, t_mlx *mlx);
 void				calcul_perp_wall_dist(t_mlx *mlx);
@@ -179,6 +212,7 @@ void				draw_sprite(t_mlx *mlx, t_cfg *cfg);
 int					write_error(int error_code);
 int					close_window(t_cub *cub);
 void				free_tab(char **tab);
+int					print_screen(t_cub *cub);
 char				**ft_stradd_back(char *line, char **tab);
 char				*ft_strdup(const char *s1);
 #endif
