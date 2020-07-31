@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 16:19:04 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/31 22:37:50 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/31 22:44:39 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,17 @@ int		is_save(char *str)
 	len = ft_strlen(str);
 	if (len != 6)
 		return (0);
-	while(str[i] == src[i] && str[i] && src[i])
+	while (str[i] == src[i] && str[i] && src[i])
 		i++;
 	if (i != 6)
-		return(0);
+		return (0);
 	return (1);
 }
 
 int		check_arg(int ac, char **av)
 {
 	int len;
-	
+
 	if (ac < 2 || ac > 3)
 		return (write_error(-1));
 	if (ac == 2)
@@ -54,7 +54,7 @@ int		check_arg(int ac, char **av)
 int		get_config(int ac, char **av, t_cub *cub)
 {
 	int	fd;
-	
+
 	if (!check_arg(ac, av))
 		return (0);
 	if ((fd = open(av[1], O_RDONLY)) == -1)
