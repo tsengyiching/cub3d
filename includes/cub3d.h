@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 15:57:17 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/30 23:34:44 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/31 19:02:35 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct		s_bmfh
 	int				file_size;
 	short			reserved1;
 	short			reserved2;
-	unsigned int 	offset_bits;
+	unsigned int	offset_bits;
 }					t_bmfh;
 
 typedef struct		s_bmih
@@ -174,6 +174,7 @@ typedef struct		s_cub
 	t_key			key;
 	t_bmfh			bmfh;
 	t_bmih			bmih;
+	t_rgb			rgb;
 }					t_cub;
 
 int					parsing(int fd, t_cfg *cfg, t_mlx *mlx);
@@ -212,7 +213,7 @@ void				draw_sprite(t_mlx *mlx, t_cfg *cfg);
 int					write_error(int error_code);
 int					close_window(t_cub *cub);
 void				free_tab(char **tab);
-int					print_screen(t_cub *cub);
+void				print_screen(t_cub *cub);
 char				**ft_stradd_back(char *line, char **tab);
 char				*ft_strdup(const char *s1);
 #endif

@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 15:06:28 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/22 23:04:09 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/31 19:30:06 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ int		is_valid_map(t_cfg *cfg)
 			if (cfg->map[x][y] == '0' || cfg->map[x][y] == '2'
 				|| cfg->map[x][y] == cfg->start_dir)
 			{
-				if ((error_code = check_wall(x, y, cfg)) < 0)
-					return (error_code);
+				if (!check_wall(x, y, cfg))
+					return (0);
 			}
 			y++;
 		}
@@ -85,7 +85,7 @@ int		count_sprite(t_cfg *cfg, t_mlx *mlx)
 		x++;
 	}
 	if (!(mlx->spr = malloc(sizeof(t_sprite) * cfg->sprite_nb)))
-		return (-14);
+		return (write_error(-14));
 	return (1);
 }
 
@@ -95,14 +95,14 @@ int		check_map(t_cfg *cfg, t_mlx *mlx)
 
 	error_code = 0;
 	if (!check_map_elem(cfg))
-		return (-16);
+		return (write_error(-16));
 	if (cfg->player != 1)
-		return (-17);
-	if ((error_code = is_valid_map(cfg)) < 0)
-		return (error_code);
-	if ((error_code = count_sprite(cfg, mlx)) < 0)
-		return (error_code);
+		return (write_error(-17));
+	if (!is_valid_map(cfg))
+		return (0);
+	if (!count_sprite(cfg, mlx))
+		return (0);
 	if (!(mlx->buf = malloc(sizeof(double) * (cfg->width - 1))))
-		return (-14);
+		return (write_error(-14));
 	return (1);
 }

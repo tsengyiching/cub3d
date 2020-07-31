@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 16:39:30 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/30 23:41:11 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/31 18:59:12 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,15 @@ void	write_in_bmp(int fd, t_cub *cub)
 	while (y >= 0)
 	{
 		x = 0;
-		while (x < cub->cfg.width - 1)
+		while (x < cub->cfg.width)
 		{
 			pixel = cub->mlx.pixel[x + y * cub->cfg.width];
+			cub->rgb.red = pixel % 256;
+			pixel = pixel / 256;
+			cub->rgb.green = pixel % 256;
+			pixel = pixel / 256;
+			cub->rgb.blue = pixel % 256;
+			write(fd, &cub->rgb, 3);
 			x++;
 		}
 		y--;
@@ -52,18 +58,21 @@ void	init_bitmap(t_bmfh *bmfh, t_bmih *bmih, t_cfg *cfg)
 	bmih->clr_important = 0;
 }
 
-int		print_screen(t_cub *cub)
+void	print_screen(t_cub *cub)
 {
 	int		fd;
 
 	run_cub3d(cub);
 	init_bitmap(&cub->bmfh, &cub->bmih, &cub->cfg);
-	if ((fd = open("screenshop.bmp", O_RDWR | O_CREAT, 0777)) == -1)
-		return (write_error(-2));
+	if ((fd = open("screenshot.bmp", O_RDWR | O_CREAT, 0777)) == -1)
+	{
+		write_error(-2);
+		close(fd);
+		close_window(cub);
+	}
 	write(fd, &cub->bmfh, 14);
 	write(fd, &cub->bmih, 40);
 	write_in_bmp(fd, cub);
 	close(fd);
 	close_window(cub);
-	return (1);
 }

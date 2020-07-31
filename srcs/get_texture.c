@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 16:48:38 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/29 11:46:45 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/31 19:18:11 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int		get_texture_s(t_mlx *mlx, char *line)
 	if (*line == 'O')
 	{
 		if (!get_texture_so(mlx, line + 1))
-			return (-8);
+			return (write_error(-8));
 	}
 	else
 	{
@@ -78,7 +78,7 @@ int		get_texture_s(t_mlx *mlx, char *line)
 		mlx->img[SP].img_ptr = mlx_xpm_file_to_image(mlx->mlx_ptr, line,
 			&mlx->img[SP].width, &mlx->img[SP].height);
 		if (!mlx->img[SP].img_ptr)
-			return (-9);
+			return (write_error(-9));
 		mlx->img[SP].img_data = (int *)mlx_get_data_addr(mlx->img[SP].img_ptr,
 			&mlx->img[SP].bpp, &mlx->img[SP].size_line, &mlx->img[SP].endian);
 	}

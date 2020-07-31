@@ -6,37 +6,15 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 15:13:11 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/30 14:36:24 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/31 19:09:30 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int		write_error(int error_code)
+void	write_error2(int error_code)
 {
-	if (error_code == -1)
-		write(1, "Error: Wrong number of argument\n", 32);
-	else if (error_code == -2)
-		write(1, "Error: Opening file failed\n", 27);
-	else if (error_code == -3)
-		write(1, "Error: Having invalid identifier\n", 34);
-	else if (error_code == -4)
-		write(1, "Error: Resolution\n", 18);
-	else if (error_code == -5)
-		write(1, "Error: Invalid path to the north texture\n", 41);
-	else if (error_code == -6)
-		write(1, "Error: Invalid path to the west texture\n", 40);
-	else if (error_code == -7)
-		write(1, "Error: Invalid path to the east texture\n", 40);
-	else if (error_code == -8)
-		write(1, "Error: Invalid path to the south texture\n", 41);
-	else if (error_code == -9)
-		write(1, "Error: Invalid path to the sprite texture\n", 42);
-	else if (error_code == -10)
-		write(1, "Error: Invalid ceiling RGB\n", 28);
-	else if (error_code == -11)
-		write(1, "Error: Invalid floor RGB\n", 26);
-	else if (error_code == -12)
+	if (error_code == -12)
 		write(1, "Error: Invalid char after RGB\n", 30);
 	else if (error_code == -13)
 		write(1, "Error: Invalid map\n", 19);
@@ -60,5 +38,39 @@ int		write_error(int error_code)
 		write(1, "Error: Invalid map file extension\n", 34);
 	else if (error_code == -23)
 		write(1, "Error: the last argument is not --save\n", 38);
+}
+
+void	write_error1(int error_code)
+{
+	if (error_code == -1)
+		write(1, "Error: Wrong number of argument\n", 32);
+	else if (error_code == -2)
+		write(1, "Error: Opening file failed\n", 27);
+	else if (error_code == -3)
+		write(1, "Error: Having invalid identifier\n", 34);
+	else if (error_code == -4)
+		write(1, "Error: Resolution\n", 18);
+	else if (error_code == -5)
+		write(1, "Error: Invalid path to the north texture\n", 41);
+	else if (error_code == -6)
+		write(1, "Error: Invalid path to the west texture\n", 40);
+	else if (error_code == -7)
+		write(1, "Error: Invalid path to the east texture\n", 40);
+	else if (error_code == -8)
+		write(1, "Error: Invalid path to the south texture\n", 41);
+	else if (error_code == -9)
+		write(1, "Error: Invalid path to the sprite texture\n", 42);
+	else if (error_code == -10)
+		write(1, "Error: Invalid ceiling RGB\n", 28);
+	else if (error_code == -11)
+		write(1, "Error: Invalid floor RGB\n", 26);
+}
+
+int		write_error(int error_code)
+{
+	if (error_code >= -11)
+		write_error1(error_code);
+	else
+		write_error2(error_code);
 	return (0);
 }

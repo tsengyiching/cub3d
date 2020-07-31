@@ -6,7 +6,7 @@
 #    By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/29 11:58:13 by yictseng          #+#    #+#              #
-#    Updated: 2020/07/29 19:37:24 by yictseng         ###   ########lyon.fr    #
+#    Updated: 2020/07/31 18:58:25 by yictseng         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,6 +71,7 @@ $(NAME)			: $(OBJS) $(HEADER)
 clean			:
 				  @$(MAKE) -C minilibx/ clean
 				  @$(RM) $(OBJS)
+				  @$(RM) screenshot.bmp
 
 fclean			: clean
 				  @$(RM) $(NAME)

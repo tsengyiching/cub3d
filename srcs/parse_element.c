@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 18:42:40 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/29 11:50:54 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/31 19:18:44 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,41 +45,38 @@ int		parse_rgb(t_cfg *cfg, char *line)
 	{
 		index++;
 		cfg->ceiling = get_rgb(line, &index);
-		if (!cfg->ceiling || cfg->ceiling == -1)
-			return (-10);
+		if (cfg->ceiling == -1)
+			return (write_error(-10));
 	}
 	else if (line[0] == 'F')
 	{
 		index++;
 		cfg->floor = get_rgb(line, &index);
 		if (!cfg->floor || cfg->floor == -1)
-			return (-11);
+			return (write_error(-11));
 	}
 	if (line[index] != '\0')
-		return (-12);
+		return (write_error(-12));
 	return (1);
 }
 
 int		parse_texture(t_cfg *cfg, t_mlx *mlx, char *line)
 {
-	int	error_code;
-
-	error_code = 0;
 	if (line[0] == 'N' && line[1] == 'O')
 		if (!get_texture_no(mlx, line + 2))
-			return (-5);
+			return (write_error(-5));
 	if (line[0] == 'W' && line[1] == 'E')
 		if (!get_texture_we(mlx, line + 2))
-			return (-6);
+			return (write_error(-6));
 	if (line[0] == 'E' && line[1] == 'A')
 		if (!get_texture_ea(mlx, line + 2))
-			return (-7);
+			return (write_error(-7));
 	if (line[0] == 'C' || line[0] == 'F')
-		if ((error_code = parse_rgb(cfg, line)) < 0)
-			return (error_code);
+		if (!parse_rgb(cfg, line))
+			return (0);
 	if (line[0] == 'S')
-		if ((error_code = get_texture_s(mlx, line + 1)) < 0)
-			return (error_code);
+		if (!get_texture_s(mlx, line + 1))
+			return (0);
 	return (1);
 }
 
