@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 14:07:59 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/30 21:25:29 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/31 20:54:55 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,16 @@ void	free_tab(char **tab)
 	int	i;
 
 	i = 0;
-	while (tab[i])
+	if (tab)
 	{
-		free(tab[i]);
-		i++;
+		while (tab[i])
+		{
+			free(tab[i]);
+			i++;
+		}
+		free(tab);
+		tab = NULL;
 	}
-	free(tab);
-	tab = NULL;
 }
 
 int		close_window(t_cub *cub)

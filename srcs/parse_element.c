@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 18:42:40 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/31 19:18:44 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/07/31 20:51:46 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int		parse_rgb(t_cfg *cfg, char *line)
 	{
 		index++;
 		cfg->floor = get_rgb(line, &index);
-		if (!cfg->floor || cfg->floor == -1)
+		if (cfg->floor == -1)
 			return (write_error(-11));
 	}
 	if (line[index] != '\0')
