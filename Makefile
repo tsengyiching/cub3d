@@ -6,7 +6,7 @@
 #    By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/29 11:58:13 by yictseng          #+#    #+#              #
-#    Updated: 2020/08/01 19:13:22 by yictseng         ###   ########lyon.fr    #
+#    Updated: 2020/08/05 21:04:01 by yictseng         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ CYAN = \x1b[36m
 NAME 			= cub3D
 PATH_HEADER		= includes/
 PATH_SRCS		= srcs/
+PATH_OBJS		= objs/
 HEADER_LIST		= cub3d.h\
 				  get_next_line.h\
 
@@ -48,7 +49,7 @@ SRCS_LIST		= check_map.c\
 				  run_raycasting.c\
 				  write_error.c\
 
-OBJS			= $(SRCS_LIST:.c=.o)
+OBJS			= $(addprefix $(PATH_OBJS), $(SRCS_LIST:.c=.o))
 
 HEADER			= $(addprefix $(PATH_HEADER), $(HEADER_LIST))
 
@@ -58,7 +59,7 @@ LIB_MLX			= -I minilibx -L minilibx -lmlx -framework OpenGL -framework Appkit
 
 CC 				= gcc
 
-RM				= rm -f
+RM				= rm -rf
 
 CFLAGS			= -Wall -Wextra -Werror
 
@@ -69,8 +70,9 @@ CFLAGS			= -Wall -Wextra -Werror
 all				: $(MLX) $(NAME)
 
 $(PATH_OBJS)%.o	: $(PATH_SRCS)%.c $(HEADER)
+				  @mkdir -p $(PATH_OBJS)
 				  @echo "$(GREEN)[Compiled]:\t$(CYAN)"$<
-			  	  @$(CC) $(CFLAGS) -c $< -I $(HEADER)
+			  	  @$(CC) $(CFLAGS) -c $< -o $@
 
 $(MLX)			:
 			  	  @$(MAKE) -C minilibx/
@@ -82,7 +84,7 @@ $(NAME)			: $(OBJS) $(HEADER)
 
 clean			:
 				  @$(MAKE) clean -C minilibx/
-				  @$(RM) $(OBJS)
+				  @$(RM) $(PATH_OBJS)
 				  @$(RM) screenshot.bmp
 				  @echo "${RED}[CLEAN]:\t$(YELLOW)Minilibx"
 				  @echo "${RED}[CLEAN]:\t$(YELLOW)Objects"
