@@ -6,7 +6,7 @@
 #    By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/29 11:58:13 by yictseng          #+#    #+#              #
-#    Updated: 2020/08/05 21:04:01 by yictseng         ###   ########lyon.fr    #
+#    Updated: 2020/08/06 22:42:17 by yictseng         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ BLUE = \x1b[34m
 PURPLE = \x1b[35m
 CYAN = \x1b[36m
 
-NAME 			= cub3D
+NAME 			= Cub3D
 PATH_HEADER		= includes/
 PATH_SRCS		= srcs/
 PATH_OBJS		= objs/

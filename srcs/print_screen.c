@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 16:39:30 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/31 18:59:12 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/08/08 12:38:47 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,15 @@ void	print_screen(t_cub *cub)
 {
 	int		fd;
 
+	if ((cub->mlx.win_ptr = mlx_new_window(cub->mlx.mlx_ptr, cub->cfg.width,
+			cub->cfg.height, "Cube3D")) == NULL)
+		exit(write_error(-24));
+	if ((cub->mlx.new_img = mlx_new_image(cub->mlx.mlx_ptr, cub->cfg.width,
+			cub->cfg.height)) == NULL)
+		exit(write_error(-24));
+	if ((cub->mlx.pixel = (int *)mlx_get_data_addr(cub->mlx.new_img,
+			&cub->mlx.bpp, &cub->mlx.size_line, &cub->mlx.endian)) == NULL)
+		exit(write_error(-24));
 	run_cub3d(cub);
 	init_bitmap(&cub->bmfh, &cub->bmih, &cub->cfg);
 	if ((fd = open("screenshot.bmp", O_RDWR | O_CREAT, 0777)) == -1)

@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 15:13:11 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/31 19:09:30 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/08/08 12:30:45 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,12 @@ int		write_error(int error_code)
 {
 	if (error_code >= -11)
 		write_error1(error_code);
-	else
+	else if (error_code <= -12 && error_code >= -23)
 		write_error2(error_code);
+	else
+	{
+		if (error_code == -24)
+			write(1, "Error: mlx function failed\n", 27);
+	}
 	return (0);
 }

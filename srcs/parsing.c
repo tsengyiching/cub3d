@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 16:15:15 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/31 20:05:48 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/08/08 12:54:16 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,21 @@ void	free_line(char *line)
 	line = NULL;
 }
 
+int		get_map_first_line(t_cfg *cfg, char *line)
+{
+	if (line != NULL)
+	{
+		if (!(cfg->map = malloc(sizeof(char *) * 2)))
+			return (write_error(-14));
+		if (!(cfg->map[0] = ft_strdup(line)))
+			return (write_error(-14));
+		cfg->map[1] = NULL;
+		free(line);
+		line = NULL;
+	}
+	return (1);
+}
+
 int		get_map(int ret, int fd, t_cfg *cfg, char *line)
 {
 	char	**tab;
@@ -50,19 +65,14 @@ int		get_map(int ret, int fd, t_cfg *cfg, char *line)
 	tab = NULL;
 	while (ret > 0)
 	{
-		if (line != NULL)
-		{
-			if (!(cfg->map = malloc(sizeof(char *) * 2)))
-				return (write_error(-14));
-			if (!(cfg->map[0] = ft_strdup(line)))
-				return (write_error(-14));
-			cfg->map[1] = NULL;
-			free(line);
-			line = NULL;
-		}
+		if (!(get_map_first_line(cfg, line)))
+			return (0);
 		ret = get_next_line(fd, &line);
 		if (!is_wall(line) && ret != 0)
+		{
+			free(line);
 			return (write_error(-13));
+		}
 		tab = cfg->map;
 		if (!(cfg->map = ft_stradd_back(line, tab)))
 			return (write_error(-14));
