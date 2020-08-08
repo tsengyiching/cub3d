@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 18:42:40 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/31 23:22:55 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/08/08 18:22:42 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,32 +60,48 @@ int		parse_rgb(t_cfg *cfg, char *line)
 	return (1);
 }
 
-int		parse_texture(t_cfg *cfg, t_mlx *mlx, char *line)
+int		parse_texture2(t_cfg *cfg, t_mlx *mlx, char *line)
 {
-	if (line[0] == 'N' && line[1] == 'O')
-		if (!get_texture_no(mlx, line + 2))
-			return (write_error(-5));
-	if (line[0] == 'W' && line[1] == 'E')
-		if (!get_texture_we(mlx, line + 2))
-			return (write_error(-6));
-	if (line[0] == 'E' && line[1] == 'A')
-		if (!get_texture_ea(mlx, line + 2))
-			return (write_error(-7));
-	if (line[0] == 'C' || line[0] == 'F')
+	if (line[0] == 'S' && line[1] == 'O')
+	{
+		if (!get_texture_so(mlx, line + 2))
+			return (write_error(-8));
+	}
+	else if (line[0] == 'S')
+	{
+		if (!get_texture_sp(mlx, line + 1))
+			return (write_error(-9));
+	}
+	else if (line[0] == 'C' || line[0] == 'F')
+	{
 		if (!parse_rgb(cfg, line))
 			return (0);
-	if (line[0] == 'S')
-		if (!get_texture_s(mlx, line + 1))
-			return (0);
+	}
 	return (1);
 }
 
-void	adjust_resolution(t_cfg *cfg)
+int		parse_texture(t_cfg *cfg, t_mlx *mlx, char *line)
 {
-	cfg->width = cfg->width > 1440 ? 1440 : cfg->width;
-	cfg->height = cfg->height > 900 ? 900 : cfg->height;
-	cfg->width = cfg->width < 100 ? 100 : cfg->width;
-	cfg->height = cfg->height < 100 ? 100 : cfg->height;
+	if (line[0] == 'N' && line[1] == 'O')
+	{
+		if (!get_texture_no(mlx, line + 2))
+			return (write_error(-5));
+	}
+	else if (line[0] == 'W' && line[1] == 'E')
+	{
+		if (!get_texture_we(mlx, line + 2))
+			return (write_error(-6));
+	}
+	else if (line[0] == 'E' && line[1] == 'A')
+	{
+		if (!get_texture_ea(mlx, line + 2))
+			return (write_error(-7));
+	}
+	else if (line[0] == 'S' || line[0] == 'F' || line[0] == 'C')
+		parse_texture2(cfg, mlx, line);
+	else
+		return (write_error(-13));
+	return (1);
 }
 
 int		parse_resolution(t_cfg *cfg, char *line)

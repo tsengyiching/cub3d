@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 15:57:17 by yictseng          #+#    #+#             */
-/*   Updated: 2020/08/05 20:18:50 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/08/08 18:09:00 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,7 @@ typedef struct		s_mlx
 
 typedef struct		s_cfg
 {
+	int				check_value;
 	int				height;
 	int				width;
 	int				player;
@@ -183,7 +184,8 @@ int					parse_texture(t_cfg *cfg, t_mlx *mlx, char *line);
 int					get_texture_no(t_mlx *mlx, char *line);
 int					get_texture_we(t_mlx *mlx, char *line);
 int					get_texture_ea(t_mlx *mlx, char *line);
-int					get_texture_s(t_mlx *mlx, char *line);
+int					get_texture_sp(t_mlx *mlx, char *line);
+int					get_texture_so(t_mlx *mlx, char *line);
 int					check_map(t_cfg *cfg, t_mlx *mlx);
 int					check_wall(int x, int y, t_cfg *cfg);
 int					ft_atoi(int i, char *line);
@@ -214,6 +216,7 @@ int					write_error(int error_code);
 int					close_window(t_cub *cub);
 void				free_tab(char **tab);
 void				print_screen(t_cub *cub);
+void				adjust_resolution(t_cfg *cfg);
 char				**ft_stradd_back(char *line, char **tab);
 char				*ft_strdup(const char *s1);
 #endif

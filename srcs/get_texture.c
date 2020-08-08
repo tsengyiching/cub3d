@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 16:48:38 by yictseng          #+#    #+#             */
-/*   Updated: 2020/08/08 12:56:45 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/08/08 18:10:49 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,25 +72,17 @@ int		get_texture_ea(t_mlx *mlx, char *line)
 	return (1);
 }
 
-int		get_texture_s(t_mlx *mlx, char *line)
+int		get_texture_sp(t_mlx *mlx, char *line)
 {
-	if (*line == 'O')
-	{
-		if (!get_texture_so(mlx, line + 1))
-			return (write_error(-8));
-	}
-	else
-	{
-		while (*line == ' ')
-			line++;
-		mlx->img[SP].img_ptr = mlx_xpm_file_to_image(mlx->mlx_ptr, line,
-			&mlx->img[SP].width, &mlx->img[SP].height);
-		if (!mlx->img[SP].img_ptr)
-			return (write_error(-9));
-		mlx->img[SP].img_data = (int *)mlx_get_data_addr(mlx->img[SP].img_ptr,
-			&mlx->img[SP].bpp, &mlx->img[SP].size_line, &mlx->img[SP].endian);
-		if (!mlx->img[SP].img_data)
-			return (0);
-	}
+	while (*line == ' ')
+		line++;
+	mlx->img[SP].img_ptr = mlx_xpm_file_to_image(mlx->mlx_ptr, line,
+		&mlx->img[SP].width, &mlx->img[SP].height);
+	if (!mlx->img[SP].img_ptr)
+		return (0);
+	mlx->img[SP].img_data = (int *)mlx_get_data_addr(mlx->img[SP].img_ptr,
+		&mlx->img[SP].bpp, &mlx->img[SP].size_line, &mlx->img[SP].endian);
+	if (!mlx->img[SP].img_data)
+		return (0);
 	return (1);
 }

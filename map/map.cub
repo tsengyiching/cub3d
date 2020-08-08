@@ -2,8 +2,6 @@ R   1400 1000
 
 NO ./textures/kiss.xpm
 SO ./textures/thescream.xpm
-WE ./textures/thegirl.xpm
-EA ./textures/medieval.xpm
 S ./textures/baby.xpm
 
 F 102,0,0

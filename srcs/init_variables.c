@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 13:57:22 by yictseng          #+#    #+#             */
-/*   Updated: 2020/08/05 21:06:12 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/08/08 17:45:41 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	init_config(t_cfg *cfg)
 	cfg->player = 0;
 	cfg->start_posx = 0;
 	cfg->start_posy = 0;
+	cfg->check_value = 0;
 }
 
 void	init_plane_position(t_cfg *cfg, t_mlx *mlx)

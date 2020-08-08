@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 15:06:28 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/31 19:30:06 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/08/08 17:59:09 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,10 @@ int		count_sprite(t_cfg *cfg, t_mlx *mlx)
 
 int		check_map(t_cfg *cfg, t_mlx *mlx)
 {
-	int		error_code;
-
-	error_code = 0;
+	if (cfg->width == -1 || cfg->height == -1)
+		return (write_error(-4));
+	if (cfg->check_value != 7)
+		return (write_error(-13));
 	if (!check_map_elem(cfg))
 		return (write_error(-16));
 	if (cfg->player != 1)

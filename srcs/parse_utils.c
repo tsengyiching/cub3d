@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 18:43:42 by yictseng          #+#    #+#             */
-/*   Updated: 2020/07/30 14:59:21 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/08/08 18:03:45 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,12 @@ char	**ft_stradd_back(char *line, char **tab)
 	dup[i] = NULL;
 	free(tab);
 	return (dup);
+}
+
+void	adjust_resolution(t_cfg *cfg)
+{
+	cfg->width = cfg->width > 1440 ? 1440 : cfg->width;
+	cfg->height = cfg->height > 900 ? 900 : cfg->height;
+	cfg->width = cfg->width < 100 ? 100 : cfg->width;
+	cfg->height = cfg->height < 100 ? 100 : cfg->height;
 }

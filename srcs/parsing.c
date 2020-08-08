@@ -6,7 +6,7 @@
 /*   By: yictseng <yictseng@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 16:15:15 by yictseng          #+#    #+#             */
-/*   Updated: 2020/08/08 12:54:16 by yictseng         ###   ########lyon.fr   */
+/*   Updated: 2020/08/08 17:46:12 by yictseng         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int		find_identifier(t_cfg *cfg, t_mlx *mlx, char *line)
 	{
 		if (!parse_texture(cfg, mlx, line))
 			return (0);
+		cfg->check_value++;
 	}
 	else if (line[0] == '1' || line[0] == ' ')
 	{
