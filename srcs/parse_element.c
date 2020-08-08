@@ -31,7 +31,7 @@ int		get_rgb(char *line, int *index)
 	(*index)++;
 	blue = ft_atoi_save_index(index, line);
 	if (!is_valid_color(red, green, blue))
-		return (0);
+		return (-1);
 	res = (256 * 256 * red) + (256 * green) + blue;
 	return (res);
 }
